@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Lora:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-highest": "#e4e2de", "surface-bright": "#fbf9f5", "on-tertiary-container": "#96a2ad", "secondary-fixed": "#ffdeac", "error": "#ba1a1a", "on-primary-container": "#89a4ba", "surface-container-low": "#f5f3ef", "on-error-container": "#93000a", "on-background": "#1b1c1a", "tertiary-container": "#2d3942", "background": "#fbf9f5", "secondary": "#79591d", "outline-variant": "#c3c7cd", "surface-container": "#efeeea", "secondary-container": "#fdd089", "primary-container": "#1f3a4d", "on-tertiary": "#ffffff", "on-surface-variant": "#42474c", "on-tertiary-fixed": "#111d25", "secondary-fixed-dim": "#ebc07a", "tertiary": "#18232c", "primary": "#062437", "surface-variant": "#e4e2de", "surface-tint": "#476176", "on-primary": "#ffffff", "primary-fixed": "#cae6fe", "inverse-on-surface": "#f2f0ed", "surface": "#fbf9f5", "on-primary-fixed-variant": "#2f4a5d", "outline": "#73777d", "on-surface": "#1b1c1a", "surface-container-lowest": "#ffffff", "on-primary-fixed": "#001e2f", "surface-dim": "#dbdad6", "on-secondary": "#ffffff", "primary-fixed-dim": "#aecae2", "inverse-primary": "#aecae2", "surface-container-high": "#eae8e4", "tertiary-fixed-dim": "#bcc8d3", "on-tertiary-fixed-variant": "#3c4852", "error-container": "#ffdad6", "on-error": "#ffffff", "on-secondary-container": "#78581c", "inverse-surface": "#30312e", "on-secondary-fixed": "#281900", "on-secondary-fixed-variant": "#5e4105", "tertiary-fixed": "#d8e4f0" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1rem", "gutter": "1rem", "space-md": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "space-sm": "0.5rem", "space-lg": "1.5rem" }, "fontFamily": { "label-lg": ["Inter"], "headline-md": ["Lora"], "headline-sm": ["Lora"], "headline-lg": ["Lora"], "title-sm": ["Inter"], "label-sm": ["Inter"], "body-md": ["Inter"], "body-lg": ["Inter"], "label-md": ["Inter"], "title-md": ["Inter"], "display-sm": ["Lora"], "body-sm": ["Inter"] }, "fontSize": { "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }], "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "title-sm": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.4px", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.2px", "fontWeight": "500" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "display-sm": ["30px", { "lineHeight": "38px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Brand logo. - Primary color: #1f3a4d - Font: publicSans - Mode: light - Roundness: rounded-md" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDjicMVKBAcg-bT7NywKiNsP1XXz7JWjuoF1TOuhoiQ9xVp6cw1b-Us2O13DtEUfhkPjKKLyMlaLxoP-TvolcC9MOgtYois1zicUKkDaDfFe-NxBBc0xJ93_cyIOddtJEUFSPB4z5n2ivtVuRxHzJ1nhNFM5dWlJTA-zwUbQCzItEu4D_9Jd90mGCV_BxdPBlU1YUd8UD8uRTksUZSO3LnES0fPuu0MdT27hd0cgoc"/><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">LifeNest Safe</span><span class="font-title-sm text-title-sm text-on-surface">Hello, Lerato</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Lock vault immediately" class="w-11 h-11 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">lock</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin space-y-space-md">
+<!-- Sub-Header Status Bar & Summary Bar -->
+<section class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-secondary text-on-secondary font-title-sm text-[11px] font-semibold tracking-tight">
+          LM
+        </span>
+<span class="font-headline-sm text-headline-sm text-primary">Lerato Mokoena</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Vault Encrypted</span>
+</div>
+</div>
+<!-- Quick Counts Pill Bar -->
+<div class="flex items-center justify-between bg-surface-container-lowest px-space-md py-2.5 rounded-xl shadow-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">description</span>
+<span class="font-label-md text-label-md text-on-surface-variant"><strong class="font-semibold text-primary">12</strong> Documents</span>
+</div>
+<span class="text-outline-variant font-light text-xs">•</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">account_balance</span>
+<span class="font-label-md text-label-md text-on-surface-variant"><strong class="font-semibold text-primary">9</strong> Assets</span>
+</div>
+<span class="text-outline-variant font-light text-xs">•</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">group</span>
+<span class="font-label-md text-label-md text-on-surface-variant"><strong class="font-semibold text-primary">2</strong> Contacts</span>
+</div>
+</div>
+</section>
+<!-- ALERT CARD: Vault Access Request -->
+<section class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-md shadow-sm transition-all duration-300" id="alert-card">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+<div class="flex items-start gap-space-sm pl-1">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">shield_person</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-2">
+<h2 class="font-title-sm text-title-sm text-primary">Vault Access Request</h2>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-[10px] tracking-wide uppercase">Requires Action</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+<strong class="font-medium text-on-surface">Sipho Mokoena</strong> initiated an emergency verification challenge for Estate Directives.
+        </p>
+<div class="mt-3 flex items-center justify-end gap-2">
+<button class="px-3.5 py-1.5 rounded-lg bg-surface-container text-on-surface-variant font-label-md text-label-md active:bg-surface-container-highest transition-colors" type="button">
+            Dismiss
+          </button>
+<button class="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md active:bg-primary-container transition-colors shadow-sm" type="button">
+<span>Review Request</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 180-DAY REVIEW CARD -->
+<section class="rounded-xl bg-surface-container-low p-space-md shadow-sm" id="review-card">
+<div class="flex items-start gap-space-sm">
+<div class="flex-shrink-0 w-9 h-9 rounded-full bg-secondary-container/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">history_toggle_off</span>
+</div>
+<div class="flex-1 min-w-0">
+<h2 class="font-title-sm text-title-sm text-primary">180-Day Security Pulse</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+          Regular confirmations ensure your designated executors have timely, legally reliable records.
+        </p>
+</div>
+</div>
+<div class="mt-3.5 flex items-center justify-end gap-space-sm">
+<button class="px-3 py-2 rounded-lg text-primary font-label-md text-label-md hover:bg-surface-container transition-colors" type="button">
+        Everything is Current
+      </button>
+<button class="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm active:bg-primary-container transition-colors" type="button">
+        Begin Review
+      </button>
+</div>
+</section>
+<!-- READINESS HERO SECTION -->
+<section class="rounded-2xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col items-center text-center relative overflow-hidden">
+<div class="w-full flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">verified_user</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Vault Readiness</h2>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container font-label-md text-label-md font-semibold text-secondary" id="readiness-chip">
+        62% Prepared
+      </span>
+</div>
+<!-- Segmented Readiness Arc Ring (8 segments) -->
+<div class="relative w-44 h-44 my-2 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 160 160">
+<defs>
+<lineargradient id="goldSheen" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#b08a4a"></stop>
+<stop offset="100%" stop-color="#d4af37"></stop>
+</lineargradient>
+</defs>
+<!-- 8 discrete segments around circle (r=62, circumference ~ 389.5, seg ~ 41.5, gap ~ 7.2) -->
+<!-- Completed Segments (5) -->
+<circle cx="80" cy="80" fill="none" id="seg-1" r="62" stroke="#1f3a4d" stroke-dasharray="41.5 7.2" stroke-dashoffset="0" stroke-linecap="round" stroke-width="11"></circle>
+<circle cx="80" cy="80" fill="none" id="seg-2" r="62" stroke="#1f3a4d" stroke-dasharray="41.5 7.2" stroke-dashoffset="-48.7" stroke-linecap="round" stroke-width="11"></circle>
+<circle cx="80" cy="80" fill="none" id="seg-3" r="62" stroke="#1f3a4d" stroke-dasharray="41.5 7.2" stroke-dashoffset="-97.4" stroke-linecap="round" stroke-width="11"></circle>
+<circle cx="80" cy="80" fill="none" id="seg-4" r="62" stroke="#1f3a4d" stroke-dasharray="41.5 7.2" stroke-dashoffset="-146.1" stroke-linecap="round" stroke-width="11"></circle>
+<circle cx="80" cy="80" fill="none" id="seg-5" r="62" stroke="url(#goldSheen)" stroke-dasharray="41.5 7.2" stroke-dashoffset="-194.8" stroke-linecap="round" stroke-width="11"></circle>
+<!-- Pending Segments (3) -->
+<circle cx="80" cy="80" fill="none" id="seg-6" r="62" stroke="#eae8e4" stroke-dasharray="41.5 7.2" stroke-dashoffset="-243.5" stroke-linecap="round" stroke-width="11"></circle>
+<circle cx="80" cy="80" fill="none" id="seg-7" r="62" stroke="#eae8e4" stroke-dasharray="41.5 7.2" stroke-dashoffset="-292.2" stroke-linecap="round" stroke-width="11"></circle>
+<circle cx="80" cy="80" fill="none" id="seg-8" r="62" stroke="#eae8e4" stroke-dasharray="41.5 7.2" stroke-dashoffset="-340.9" stroke-linecap="round" stroke-width="11"></circle>
+</svg>
+<!-- Inner Ring Core Text -->
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<span class="font-headline-lg text-[28px] leading-tight text-primary font-bold" id="readiness-count">5 of 8</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-medium">Steps Done</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs mt-1" id="readiness-narrative">
+      You are making strong progress. Three foundational safety keys will complete your digital estate protection.
+    </p>
+<!-- Quick Action / Next recommendation banner inside readiness -->
+<div class="w-full mt-4 p-3 rounded-xl bg-secondary-fixed/30 flex items-center justify-between text-left">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="material-symbols-outlined text-secondary text-[20px] flex-shrink-0">medical_services</span>
+<div class="min-w-0">
+<p class="font-label-sm text-[11px] text-secondary uppercase font-semibold">Priority Recommendation</p>
+<p class="font-title-sm text-title-sm text-primary truncate">Add Emergency Medical Aid Info</p>
+</div>
+</div>
+<button class="flex-shrink-0 px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-medium" type="button">
+        Finish
+      </button>
+</div>
+</section>
+<!-- READINESS CHECKLIST (8 Canonical PRD Items) -->
+<section class="flex flex-col space-y-2">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-title-sm text-title-sm text-primary uppercase tracking-wider text-xs">Sanctuary Checklist</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Tap to update</span>
+</div>
+<div class="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden divide-y-0">
+<!-- 1. Profile (Completed) -->
+<div class="checklist-item flex items-center justify-between p-space-md active:bg-surface-container transition-colors cursor-pointer" data-status="complete" data-step="1">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">person_check</span>
+</div>
+<div class="min-w-0">
+<h4 class="font-title-sm text-title-sm text-primary truncate">Complete your profile</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Full names, DOB &amp; primary contact</p>
+</div>
+</div>
+<div class="flex items-center gap-1.5 flex-shrink-0 ml-2">
+<span class="font-label-sm text-label-sm text-secondary font-medium">Done</span>
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="h-px bg-surface-container mx-space-md"></div>
+<!-- 2. ID Document (Completed) -->
+<div class="checklist-item flex items-center justify-between p-space-md active:bg-surface-container transition-colors cursor-pointer" data-status="complete" data-step="2">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</div>
+<div class="min-w-0">
+<h4 class="font-title-sm text-title-sm text-primary truncate">Identity documentation</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">SA Smart ID card uploaded &amp; verified</p>
+</div>
+</div>
+<div class="flex items-center gap-1.5 flex-shrink-0 ml-2">
+<span class="font-label-sm text-label-sm text-secondary font-medium">Done</span>
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="h-px bg-surface-container mx-space-md"></div>
+<!-- 3. Insurance (Completed) -->
+<div class="checklist-item flex items-center justify-between p-space-md active:bg-surface-container transition-colors cursor-pointer" data-status="complete" data-step="3">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<div class="min-w-0">
+<h4 class="font-title-sm text-title-sm text-primary truncate">Insurance policies</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Sanlam Life &amp; Discovery Funeral policy</p>
+</div>
+</div>
+<div class="flex items-center gap-1.5 flex-shrink-0 ml-2">
+<span class="font-label-sm text-label-sm text-secondary font-medium">Done</span>
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="h-px bg-surface-container mx-space-md"></div>
+<!-- 4. Property or Vehicle (Completed) -->
+<div class="checklist-item flex items-center justify-between p-space-md active:bg-surface-container transition-colors cursor-pointer" data-status="complete" data-step="4">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">real_estate_agent</span>
+</div>
+<div class="min-w-0">
+<h4 class="font-title-sm text-title-sm text-primary truncate">Property or vehicle records</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Primary residence &amp; vehicle title</p>
+</div>
+</div>
+<div class="flex items-center gap-1.5 flex-shrink-0 ml-2">
+<span class="font-label-sm text-label-sm text-secondary font-medium">Done</span>
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="h-px bg-surface-container mx-space-md"></div>
+<!-- 5. Banking & Investments (Completed) -->
+<div class="checklist-item flex items-center justify-between p-space-md active:bg-surface-container transition-colors cursor-pointer" data-status="complete" data-step="5">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+</div>
+<div class="min-w-0">
+<h4 class="font-title-sm text-title-sm text-primary truncate">Banking &amp; investment accounts</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">FNB Cheque &amp; Allan Gray portfolios</p>
+</div>
+</div>
+<div class="flex items-center gap-1.5 flex-shrink-0 ml-2">
+<span class="font-label-sm text-label-sm text-secondary font-medium">Done</span>
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="h-px bg-surface-container mx-space-md"></div>
+<!-- 6. Emergency Profile (Next Up - Pending) -->
+<div class="checklist-item flex items-center justify-between p-space-md bg-secondary-fixed/15 active:bg-secondary-fixed/30 transition-colors cursor-pointer" data-status="pending" data-step="6">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">vital_signs</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<h4 class="font-title-sm text-title-sm text-primary truncate">Emergency profile</h4>
+<span class="px-1.5 py-0.2 rounded bg-secondary text-on-secondary font-label-sm text-[9px] font-semibold">NEXT UP</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary truncate font-medium">Medical aid details &amp; blood group</p>
+</div>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0 ml-2 text-secondary">
+<span class="font-label-md text-label-md font-semibold">Start</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+<div class="h-px bg-surface-container mx-space-md"></div>
+<!-- 7. Accepted Trusted Contact (Pending) -->
+<div class="checklist-item flex items-center justify-between p-space-md active:bg-surface-container transition-colors cursor-pointer" data-status="pending" data-step="7">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">group_add</span>
+</div>
+<div class="min-w-0">
+<h4 class="font-title-sm text-title-sm text-primary truncate">Accepted trusted contact</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Invite pending confirmation from sibling</p>
+</div>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0 ml-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+</div>
+<div class="h-px bg-surface-container mx-space-md"></div>
+<!-- 8. First Instruction / Guidance (Pending) -->
+<div class="checklist-item flex items-center justify-between p-space-md active:bg-surface-container transition-colors cursor-pointer" data-status="pending" data-step="8">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</div>
+<div class="min-w-0">
+<h4 class="font-title-sm text-title-sm text-primary truncate">Write your first instruction</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Leave legacy guidance for loved ones</p>
+</div>
+</div>
+<div class="flex items-center gap-1 flex-shrink-0 ml-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SHARED WITH ME CARD -->
+<section class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">handshake</span>
+</div>
+<div class="min-w-0">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Designated Guardian</span>
+<h3 class="font-title-sm text-title-sm text-primary mt-0.5">Shared with Me</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            You are an appointed trusted contact for <strong class="font-semibold text-primary">Sipho Mokoena</strong>'s estate directives.
+          </p>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 flex items-center justify-between border-t-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant">1 Vault circle active</span>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary font-semibold hover:underline" href="#">
+<span>View in People</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- PROTOTYPE STATE TOGGLE SWITCHER (For reviewer / audit showcase) -->
+<div class="pt-space-sm pb-space-xs flex flex-col items-center">
+<div class="flex items-center gap-1 p-1 bg-surface-container-high rounded-full shadow-inner text-xs">
+<button class="px-3 py-1 rounded-full bg-surface-container-lowest text-primary font-label-sm text-[11px] font-semibold shadow-sm transition-all" id="btn-state-active" type="button">
+        Active (5/8)
+      </button>
+<button class="px-3 py-1 rounded-full text-on-surface-variant font-label-sm text-[11px] hover:text-primary transition-all" id="btn-state-empty" type="button">
+        Empty (0/8)
+      </button>
+<button class="px-3 py-1 rounded-full text-on-surface-variant font-label-sm text-[11px] hover:text-primary transition-all" id="btn-state-offline" type="button">
+        Offline Cache
+      </button>
+</div>
+<span class="font-label-sm text-[10px] text-outline mt-1.5">Interactive Demo Controls</span>
+</div>
+</div>
+<script>
+  // Interactive prototype micro-interactions
+  const btnActive = document.getElementById('btn-state-active');
+  const btnEmpty = document.getElementById('btn-state-empty');
+  const btnOffline = document.getElementById('btn-state-offline');
+  const alertCard = document.getElementById('alert-card');
+  const reviewCard = document.getElementById('review-card');
+  const countText = document.getElementById('readiness-count');
+  const chipText = document.getElementById('readiness-chip');
+  const narrativeText = document.getElementById('readiness-narrative');
+  const allSegments = [1,2,3,4,5,6,7,8].map(i => document.getElementById('seg-' + i));
+  const checklistItems = document.querySelectorAll('.checklist-item');
+
+  function resetSwitcherButtons() {
+    [btnActive, btnEmpty, btnOffline].forEach(btn => {
+      btn.className = "px-3 py-1 rounded-full text-on-surface-variant font-label-sm text-[11px] transition-all";
+    });
+  }
+
+  btnActive.addEventListener('click', () => {
+    resetSwitcherButtons();
+    btnActive.className = "px-3 py-1 rounded-full bg-surface-container-lowest text-primary font-label-sm text-[11px] font-semibold shadow-sm transition-all";
+    alertCard.style.display = 'block';
+    reviewCard.style.display = 'block';
+    countText.innerText = '5 of 8';
+    chipText.innerText = '62% Prepared';
+    narrativeText.innerText = "You are making strong progress. Three foundational safety keys will complete your digital estate protection.";
+    
+    // set svg segments
+    allSegments.forEach((seg, idx) => {
+      if (idx < 4) seg.setAttribute('stroke', '#1f3a4d');
+      else if (idx === 4) seg.setAttribute('stroke', 'url(#goldSheen)');
+      else seg.setAttribute('stroke', '#eae8e4');
+    });
+  });
+
+  btnEmpty.addEventListener('click', () => {
+    resetSwitcherButtons();
+    btnEmpty.className = "px-3 py-1 rounded-full bg-surface-container-lowest text-primary font-label-sm text-[11px] font-semibold shadow-sm transition-all";
+    alertCard.style.display = 'none';
+    reviewCard.style.display = 'none';
+    countText.innerText = '0 of 8';
+    chipText.innerText = '0% Prepared';
+    narrativeText.innerText = "Welcome to your LifeNest sanctuary. Begin by adding your identity and emergency profile to establish legal protection.";
+    allSegments.forEach(seg => seg.setAttribute('stroke', '#eae8e4'));
+  });
+
+  btnOffline.addEventListener('click', () => {
+    resetSwitcherButtons();
+    btnOffline.className = "px-3 py-1 rounded-full bg-surface-container-lowest text-primary font-label-sm text-[11px] font-semibold shadow-sm transition-all";
+    alertCard.style.display = 'block';
+    reviewCard.style.display = 'block';
+    chipText.innerText = 'Encrypted Offline';
+    countText.innerText = '5 of 8';
+    narrativeText.innerText = "Offline cryptographic key verified. Local vault cache is encrypted with hardware enclave security.";
+  });
+
+  // Checklist tap feedback
+  checklistItems.forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.add('bg-surface-container');
+      setTimeout(() => {
+        item.classList.remove('bg-surface-container');
+      }, 200);
+    });
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-2px_10px_rgba(31,58,77,0.05)]" data-active-classes="text-primary-container font-semibold"><div class="flex justify-around items-center h-14 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-12 transition-colors text-primary-container font-semibold" data-path="home" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-label-sm mt-0.5">Home</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors" data-path="documents" href="#"><span class="material-symbols-outlined text-[22px]">description</span><span class="font-label-sm text-label-sm mt-0.5">Documents</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors" data-path="assets" href="#"><span class="material-symbols-outlined text-[22px]">account_balance</span><span class="font-label-sm text-label-sm mt-0.5">Assets</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors" data-path="people" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-sm text-label-sm mt-0.5">People</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors" data-path="more" href="#"><span class="material-symbols-outlined text-[22px]">more_horiz</span><span class="font-label-sm text-label-sm mt-0.5">More</span></a></div></nav></body></html>

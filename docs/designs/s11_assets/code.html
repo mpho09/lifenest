@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Lora:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-highest": "#e4e2de", "surface-bright": "#fbf9f5", "on-tertiary-container": "#96a2ad", "secondary-fixed": "#ffdeac", "error": "#ba1a1a", "on-primary-container": "#89a4ba", "surface-container-low": "#f5f3ef", "on-error-container": "#93000a", "on-background": "#1b1c1a", "tertiary-container": "#2d3942", "background": "#fbf9f5", "secondary": "#79591d", "outline-variant": "#c3c7cd", "surface-container": "#efeeea", "secondary-container": "#fdd089", "primary-container": "#1f3a4d", "on-tertiary": "#ffffff", "on-surface-variant": "#42474c", "on-tertiary-fixed": "#111d25", "secondary-fixed-dim": "#ebc07a", "tertiary": "#18232c", "primary": "#062437", "surface-variant": "#e4e2de", "surface-tint": "#476176", "on-primary": "#ffffff", "primary-fixed": "#cae6fe", "inverse-on-surface": "#f2f0ed", "surface": "#fbf9f5", "on-primary-fixed-variant": "#2f4a5d", "outline": "#73777d", "on-surface": "#1b1c1a", "surface-container-lowest": "#ffffff", "on-primary-fixed": "#001e2f", "surface-dim": "#dbdad6", "on-secondary": "#ffffff", "primary-fixed-dim": "#aecae2", "inverse-primary": "#aecae2", "surface-container-high": "#eae8e4", "tertiary-fixed-dim": "#bcc8d3", "on-tertiary-fixed-variant": "#3c4852", "error-container": "#ffdad6", "on-error": "#ffffff", "on-secondary-container": "#78581c", "inverse-surface": "#30312e", "on-secondary-fixed": "#281900", "on-secondary-fixed-variant": "#5e4105", "tertiary-fixed": "#d8e4f0" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "1rem", "gutter": "1rem", "space-md": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "space-sm": "0.5rem", "space-lg": "1.5rem" }, "fontFamily": { "label-lg": ["Inter"], "headline-md": ["Lora"], "headline-sm": ["Lora"], "headline-lg": ["Lora"], "title-sm": ["Inter"], "label-sm": ["Inter"], "body-md": ["Inter"], "body-lg": ["Inter"], "label-md": ["Inter"], "title-md": ["Inter"], "display-sm": ["Lora"], "body-sm": ["Inter"] }, "fontSize": { "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }], "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "title-sm": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.4px", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.2px", "fontWeight": "500" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "display-sm": ["30px", { "lineHeight": "38px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Brand logo. - Primary color: #1f3a4d - Font: publicSans - Mode: light - Roundness: rounded-md" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDjicMVKBAcg-bT7NywKiNsP1XXz7JWjuoF1TOuhoiQ9xVp6cw1b-Us2O13DtEUfhkPjKKLyMlaLxoP-TvolcC9MOgtYois1zicUKkDaDfFe-NxBBc0xJ93_cyIOddtJEUFSPB4z5n2ivtVuRxHzJ1nhNFM5dWlJTA-zwUbQCzItEu4D_9Jd90mGCV_BxdPBlU1YUd8UD8uRTksUZSO3LnES0fPuu0MdT27hd0cgoc"/><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">LifeNest Safe</span><span class="font-title-sm text-title-sm text-on-surface">Documents Vault</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Lock vault immediately" class="w-11 h-11 flex items-center justify-center rounded-full text-secondary hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">lock</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full pb-12">
+<!-- Top Sanctuary Security Banner -->
+<div class="px-margin pt-space-xs pb-space-sm">
+<div class="flex items-center justify-between bg-surface-container-low px-3 py-2 rounded-xl">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary font-semibold tracking-wide uppercase">AES-256 Encrypted Sanctuary</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Zero-knowledge institutional vault</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-highest text-primary font-semibold">Active</span>
+</div>
+</div>
+<!-- Hero / Section Title Bar -->
+<div class="px-margin pt-space-xs pb-space-md">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col max-w-[240px]">
+<div class="flex items-center gap-2 mb-1">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">My Assets</h1>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm">
+            9 Records
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Keep track of what you own and accounts that matter for seamless estate continuity.
+        </p>
+</div>
+<!-- Quick Add Action -->
+<button aria-label="Add new asset record" class="shrink-0 flex items-center gap-1.5 h-11 px-3.5 bg-primary text-on-primary rounded-xl font-label-lg text-label-lg shadow-sm active:scale-95 transition-transform" id="addAssetBtn" type="button">
+<span class="material-symbols-outlined text-[19px]">add</span>
+<span>Add</span>
+</button>
+</div>
+</div>
+<!-- Search & Filter Controls -->
+<div class="px-margin space-y-3 pb-space-md">
+<!-- Search Bar -->
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-outline text-[20px]">search</span>
+<input class="w-full h-12 pl-11 pr-10 bg-surface-container-lowest rounded-xl font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none shadow-sm transition-all" id="assetSearchInput" placeholder="Search assets, policies, accounts..." type="text"/>
+<button aria-label="Clear search" class="hidden absolute right-3 w-6 h-6 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center" id="clearSearchBtn" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- Filter Pills (Scrollable) -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+<button class="filter-chip shrink-0 h-8 px-3.5 rounded-full font-label-md text-label-md bg-primary text-on-primary font-semibold shadow-xs" data-filter="all">
+        All (9)
+      </button>
+<button class="filter-chip shrink-0 h-8 px-3.5 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-colors" data-filter="physical">
+        Physical (2)
+      </button>
+<button class="filter-chip shrink-0 h-8 px-3.5 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-colors" data-filter="financial">
+        Financial (5)
+      </button>
+<button class="filter-chip shrink-0 h-8 px-3.5 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-colors" data-filter="liabilities">
+        Liabilities (1)
+      </button>
+<button class="filter-chip shrink-0 h-8 px-3.5 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-colors" data-filter="legal">
+        Business (1)
+      </button>
+</div>
+</div>
+<!-- Reassurance / Why No Balances Callout Card -->
+<div class="px-margin pb-space-md">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-xs flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[19px]">help_center</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h2 class="font-title-sm text-title-sm text-primary">Why no financial valuations?</h2>
+<span class="font-label-sm text-label-sm text-secondary font-medium uppercase tracking-wider">Privacy First</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+          LifeNest secures ownership, policy IDs, and executors' access keys without exposing fluctuating personal wealth balances to network risks.
+        </p>
+</div>
+</div>
+</div>
+<!-- Asset Groups Accordion Container -->
+<div class="px-margin space-y-3" id="assetGroupsContainer">
+<!-- 1. Property (Expanded) -->
+<div class="asset-group bg-surface-container-lowest rounded-xl overflow-hidden shadow-xs" data-category="physical">
+<button aria-expanded="true" class="group-toggle w-full h-14 px-4 flex items-center justify-between bg-surface-container-lowest hover:bg-surface-container-low/60 transition-colors text-left" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">home_work</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-primary block">Property</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 linked title record</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[22px] transition-transform duration-200 rotate-180 group-chevron">keyboard_arrow_down</span>
+</button>
+<div class="group-content px-3 pb-3 space-y-2">
+<div class="asset-row w-full p-3 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high/60 transition-colors flex items-center justify-between cursor-pointer" role="button" tabindex="0">
+<div class="flex items-start gap-3 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-md bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">domain</span>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-primary truncate">House in Faerie Glen</span>
+<span class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-label-sm font-semibold">Physical</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">Faerie Glen, Pretoria • Title Deed Linked</p>
+<span class="inline-block mt-1 font-label-sm text-label-sm text-outline">Custody: First National Registry</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- 2. Vehicles (Expanded) -->
+<div class="asset-group bg-surface-container-lowest rounded-xl overflow-hidden shadow-xs" data-category="physical">
+<button aria-expanded="true" class="group-toggle w-full h-14 px-4 flex items-center justify-between bg-surface-container-lowest hover:bg-surface-container-low/60 transition-colors text-left" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">directions_car</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-primary block">Vehicles</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 vehicle entry</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[22px] transition-transform duration-200 rotate-180 group-chevron">keyboard_arrow_down</span>
+</button>
+<div class="group-content px-3 pb-3 space-y-2">
+<div class="asset-row w-full p-3 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high/60 transition-colors flex items-center justify-between cursor-pointer" role="button" tabindex="0">
+<div class="flex items-start gap-3 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-md bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">minor_crash</span>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-primary truncate">Toyota Corolla 1.8 Exclusive</span>
+<span class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container-highest text-primary text-label-sm font-semibold">Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">Reg: CA 849-210 • Insured with Toyota SA</p>
+<span class="inline-block mt-1 font-label-sm text-label-sm text-outline">Ownership logbook on file</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- 3. Insurance (Expanded) -->
+<div class="asset-group bg-surface-container-lowest rounded-xl overflow-hidden shadow-xs" data-category="financial">
+<button aria-expanded="true" class="group-toggle w-full h-14 px-4 flex items-center justify-between bg-surface-container-lowest hover:bg-surface-container-low/60 transition-colors text-left" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-primary block">Insurance &amp; Policies</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 primary policy</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[22px] transition-transform duration-200 rotate-180 group-chevron">keyboard_arrow_down</span>
+</button>
+<div class="group-content px-3 pb-3 space-y-2">
+<div class="asset-row w-full p-3 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high/60 transition-colors flex items-center justify-between cursor-pointer" role="button" tabindex="0">
+<div class="flex items-start gap-3 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-md bg-surface-container-lowest flex items-center justify-center text-secondary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">security</span>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-primary truncate">Old Mutual Life Cover</span>
+<span class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-label-sm font-semibold">Underwritten</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">Policy #OM-44910 • Sanlam / Old Mutual</p>
+<span class="inline-block mt-1 font-label-sm text-label-sm text-outline">Beneficiary designations verified</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- 4. Banking & Investments (Expanded) -->
+<div class="asset-group bg-surface-container-lowest rounded-xl overflow-hidden shadow-xs" data-category="financial">
+<button aria-expanded="true" class="group-toggle w-full h-14 px-4 flex items-center justify-between bg-surface-container-lowest hover:bg-surface-container-low/60 transition-colors text-left" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-primary block">Banking &amp; Investments</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2 financial accounts</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[22px] transition-transform duration-200 rotate-180 group-chevron">keyboard_arrow_down</span>
+</button>
+<div class="group-content px-3 pb-3 space-y-2">
+<!-- Asset 1 -->
+<div class="asset-row w-full p-3 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high/60 transition-colors flex items-center justify-between cursor-pointer" role="button" tabindex="0">
+<div class="flex items-start gap-3 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-md bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">credit_card</span>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-primary truncate">Standard Bank Account</span>
+<span class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container-highest text-primary text-label-sm font-semibold">Cheque</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">Elite Plus Cheque • Standard Bank SA</p>
+<span class="inline-block mt-1 font-label-sm text-label-sm text-outline">Branch code: 051001</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">chevron_right</span>
+</div>
+<!-- Asset 2 -->
+<div class="asset-row w-full p-3 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high/60 transition-colors flex items-center justify-between cursor-pointer" role="button" tabindex="0">
+<div class="flex items-start gap-3 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-md bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-primary truncate">Allan Gray Balanced Fund</span>
+<span class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-label-sm font-semibold">Portfolio</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">Unit Trust Portfolio • Allan Gray</p>
+<span class="inline-block mt-1 font-label-sm text-label-sm text-outline">Mandate ID: AG-9941-R</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- 5. Debts and Accounts (Expanded) -->
+<div class="asset-group bg-surface-container-lowest rounded-xl overflow-hidden shadow-xs" data-category="liabilities">
+<button aria-expanded="true" class="group-toggle w-full h-14 px-4 flex items-center justify-between bg-surface-container-lowest hover:bg-surface-container-low/60 transition-colors text-left" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">balance</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-primary block">Debts &amp; Liabilities</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 mortgage liability</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[22px] transition-transform duration-200 rotate-180 group-chevron">keyboard_arrow_down</span>
+</button>
+<div class="group-content px-3 pb-3 space-y-2">
+<div class="asset-row w-full p-3 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high/60 transition-colors flex items-center justify-between cursor-pointer" role="button" tabindex="0">
+<div class="flex items-start gap-3 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-md bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">real_estate_agent</span>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-primary truncate">Home Loan</span>
+<span class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant text-label-sm font-semibold">Bond</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">SA Home Loans • Linked to Faerie Glen</p>
+<span class="inline-block mt-1 font-label-sm text-label-sm text-outline">Acc: SAHL-88219</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- 6. Medical (Collapsed) -->
+<div class="asset-group bg-surface-container-lowest rounded-xl overflow-hidden shadow-xs" data-category="financial">
+<button aria-expanded="false" class="group-toggle w-full h-14 px-4 flex items-center justify-between bg-surface-container-lowest hover:bg-surface-container-low/60 transition-colors text-left" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">medical_services</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-primary block">Medical &amp; Healthcare</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 record</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[22px] transition-transform duration-200 group-chevron">keyboard_arrow_down</span>
+</button>
+<div class="group-content px-3 pb-3 space-y-2 hidden">
+<div class="asset-row w-full p-3 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high/60 transition-colors flex items-center justify-between cursor-pointer" role="button" tabindex="0">
+<div class="flex items-start gap-3 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-md bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">health_and_safety</span>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-primary truncate">Discovery Health Scheme</span>
+<span class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container-highest text-primary text-label-sm font-semibold">Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">Classic Comprehensive • Membership #992810</p>
+<span class="inline-block mt-1 font-label-sm text-label-sm text-outline">Primary member + 2 dependents</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- 7. Business (Collapsed) -->
+<div class="asset-group bg-surface-container-lowest rounded-xl overflow-hidden shadow-xs" data-category="legal">
+<button aria-expanded="false" class="group-toggle w-full h-14 px-4 flex items-center justify-between bg-surface-container-lowest hover:bg-surface-container-low/60 transition-colors text-left" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">business_center</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-primary block">Business Interests</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 record</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[22px] transition-transform duration-200 group-chevron">keyboard_arrow_down</span>
+</button>
+<div class="group-content px-3 pb-3 space-y-2 hidden">
+<div class="asset-row w-full p-3 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high/60 transition-colors flex items-center justify-between cursor-pointer" role="button" tabindex="0">
+<div class="flex items-start gap-3 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-md bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">corporate_fare</span>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-primary truncate">Mokoena Consulting CC</span>
+<span class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-label-sm font-semibold">50% Share</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">Reg #2012/094812/23 • Shareholder Agreement Linked</p>
+<span class="inline-block mt-1 font-label-sm text-label-sm text-outline">Partner: T. Mokoena</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- 8. Other Assets (Collapsed) -->
+<div class="asset-group bg-surface-container-lowest rounded-xl overflow-hidden shadow-xs" data-category="physical">
+<button aria-expanded="false" class="group-toggle w-full h-14 px-4 flex items-center justify-between bg-surface-container-lowest hover:bg-surface-container-low/60 transition-colors text-left" type="button">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+</div>
+<div>
+<span class="font-title-sm text-title-sm text-primary block">Other Valuables &amp; Safes</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 record</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[22px] transition-transform duration-200 group-chevron">keyboard_arrow_down</span>
+</button>
+<div class="group-content px-3 pb-3 space-y-2 hidden">
+<div class="asset-row w-full p-3 rounded-lg bg-surface-container-low/50 hover:bg-surface-container-high/60 transition-colors flex items-center justify-between cursor-pointer" role="button" tabindex="0">
+<div class="flex items-start gap-3 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-md bg-surface-container-lowest flex items-center justify-center text-secondary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-primary truncate">Krugerrand Safe Deposit Box</span>
+<span class="shrink-0 px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary text-label-sm font-semibold">Physical Gold</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate mt-0.5">Vault Lockbox #412 • FNB Sandton Private Branch</p>
+<span class="inline-block mt-1 font-label-sm text-label-sm text-outline">Executor co-keyholder declared</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Search / Filter Empty State (Hidden by default) -->
+<div class="hidden px-margin py-10 flex flex-col items-center text-center" id="emptySearchResults">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-low flex items-center justify-center text-outline mb-3">
+<span class="material-symbols-outlined text-[28px]">search_off</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary">No records match</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-xs">
+      Try searching by policy numbers, bank brand names, or adjust selected filters.
+    </p>
+<button class="mt-4 px-4 py-2 rounded-xl bg-surface-container-high text-primary font-label-md text-label-md" id="resetSearchBtn" type="button">
+      Reset Filters
+    </button>
+</div>
+<!-- Educational Empty State Preview Box (Delight / Demonstration toggle) -->
+<div class="px-margin pt-6">
+<div class="p-4 rounded-xl bg-surface-container-low border border-dashed border-outline-variant/60 flex flex-col items-center text-center">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-secondary mb-2">
+<span class="material-symbols-outlined text-[22px]">nest_protect</span>
+</div>
+<span class="font-title-sm text-title-sm text-primary">Zero Legacy Gaps</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs mt-1">
+        Unclaimed assets in South Africa exceed R45 billion. Adding basic account numbers guarantees your family will never lose what belongs to them.
+      </p>
+<button class="mt-3 px-4 py-2 bg-surface-container-lowest text-primary rounded-lg font-label-sm text-label-sm shadow-xs font-semibold flex items-center gap-1.5 active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+        Add Your First Asset
+      </button>
+</div>
+</div>
+<!-- Floating Quick Action Anchor (FAB) -->
+<div class="fixed bottom-20 right-4 z-40">
+<button aria-label="Add new asset" class="flex items-center gap-2 h-13 px-4 py-3 bg-primary text-on-primary rounded-full shadow-lg active:scale-95 transition-all" id="fabAddAsset" type="button">
+<span class="material-symbols-outlined text-[22px]">add</span>
+<span class="font-label-lg text-label-lg font-medium pr-1">New Asset</span>
+</button>
+</div>
+</div>
+<script>
+  // Accordion Toggle Handling
+  document.querySelectorAll('.group-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const content = button.nextElementSibling;
+      const chevron = button.querySelector('.group-chevron');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        content.classList.add('hidden');
+        button.setAttribute('aria-expanded', 'false');
+        chevron.classList.remove('rotate-180');
+      } else {
+        content.classList.remove('hidden');
+        button.setAttribute('aria-expanded', 'true');
+        chevron.classList.add('rotate-180');
+      }
+    });
+  });
+
+  // Client Filter Handling
+  const filterChips = document.querySelectorAll('.filter-chip');
+  const assetGroups = document.querySelectorAll('.asset-group');
+  const emptyState = document.getElementById('emptySearchResults');
+  const searchInput = document.getElementById('assetSearchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+  function applyFilterAndSearch() {
+    const activeChip = document.querySelector('.filter-chip.bg-primary');
+    const filterCategory = activeChip ? activeChip.getAttribute('data-filter') : 'all';
+    const query = searchInput.value.toLowerCase().trim();
+
+    let visibleCount = 0;
+
+    assetGroups.forEach(group => {
+      const groupCat = group.getAttribute('data-category');
+      const rows = group.querySelectorAll('.asset-row');
+      let groupMatches = false;
+
+      // Filter pill condition
+      const categoryMatches = (filterCategory === 'all') || (groupCat === filterCategory);
+
+      // Search text condition
+      rows.forEach(row => {
+        const textContent = row.textContent.toLowerCase();
+        const matchesQuery = query === '' || textContent.includes(query);
+
+        if (categoryMatches && matchesQuery) {
+          row.classList.remove('hidden');
+          groupMatches = true;
+        } else {
+          row.classList.add('hidden');
+        }
+      });
+
+      if (groupMatches) {
+        group.classList.remove('hidden');
+        visibleCount++;
+        // Auto-expand group if searching
+        if (query !== '') {
+          const content = group.querySelector('.group-content');
+          const toggle = group.querySelector('.group-toggle');
+          const chevron = group.querySelector('.group-chevron');
+          content.classList.remove('hidden');
+          toggle.setAttribute('aria-expanded', 'true');
+          chevron.classList.add('rotate-180');
+        }
+      } else {
+        group.classList.add('hidden');
+      }
+    });
+
+    if (visibleCount === 0) {
+      emptyState.classList.remove('hidden');
+    } else {
+      emptyState.classList.add('hidden');
+    }
+  }
+
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      filterChips.forEach(c => {
+        c.className = 'filter-chip shrink-0 h-8 px-3.5 rounded-full font-label-md text-label-md bg-surface-container-low text-on-surface-variant hover:bg-surface-container transition-colors';
+      });
+      chip.className = 'filter-chip shrink-0 h-8 px-3.5 rounded-full font-label-md text-label-md bg-primary text-on-primary font-semibold shadow-xs';
+      applyFilterAndSearch();
+    });
+  });
+
+  searchInput.addEventListener('input', () => {
+    if (searchInput.value.length > 0) {
+      clearSearchBtn.classList.remove('hidden');
+    } else {
+      clearSearchBtn.classList.add('hidden');
+    }
+    applyFilterAndSearch();
+  });
+
+  clearSearchBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    clearSearchBtn.classList.add('hidden');
+    applyFilterAndSearch();
+  });
+
+  document.getElementById('resetSearchBtn')?.addEventListener('click', () => {
+    searchInput.value = '';
+    clearSearchBtn.classList.add('hidden');
+    filterChips[0].click();
+  });
+
+  // Micro-interaction Feedback for Row Navigation Click
+  document.querySelectorAll('.asset-row').forEach(row => {
+    row.addEventListener('click', () => {
+      row.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        row.style.transform = '';
+      }, 120);
+    });
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-2px_10px_rgba(31,58,77,0.05)]" data-active-classes="text-primary-container font-semibold"><div class="flex justify-around items-center h-14 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors" data-path="s7-home-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-label-sm mt-0.5">Home</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors" data-path="documents-vault" href="#"><span class="material-symbols-outlined text-[22px]">description</span><span class="font-label-sm text-label-sm mt-0.5">Documents</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors" data-path="assets-overview" href="#"><span class="material-symbols-outlined text-[22px]">account_balance</span><span class="font-label-sm text-label-sm mt-0.5">Assets</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors" data-path="trusted-people" href="#"><span class="material-symbols-outlined text-[22px]">group</span><span class="font-label-sm text-label-sm mt-0.5">People</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 text-on-surface-variant transition-colors" data-path="vault-settings" href="#"><span class="material-symbols-outlined text-[22px]">more_horiz</span><span class="font-label-sm text-label-sm mt-0.5">More</span></a></div></nav></body></html>
