@@ -1,0 +1,9 @@
+# T-SETUP-4: the app launches and S1 shows "Get started".
+appId: com.example.lifenest
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: "Get started"
+    timeout: 15000
+- assertVisible: "Log in"
