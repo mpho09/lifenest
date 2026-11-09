@@ -32,9 +32,6 @@
       "expo-asset",
       "expo-sharing",
       "expo-secure-store"
-    ],
-    "experiments": {
-      "typedRoutes": true
-    }
+    ]
   }
 }

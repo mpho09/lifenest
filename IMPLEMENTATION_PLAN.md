@@ -282,11 +282,13 @@ lifenest/
 | `EXPO_PUBLIC_SUPABASE_URL` | Supabase address used by the app | `https://<lifenest-dev ref>.supabase.co` (dashboard → Project Settings → API). Same for phone and emulator (Section 18 #23) | Public | App |
 | `SUPABASE_URL` | Supabase address used by tests and scripts | Same value as `EXPO_PUBLIC_SUPABASE_URL` (hosted dev project) | Public | Integration tests and scripts only |
 | `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Public (anon / publishable) key | Same | Public. Safe only because every table and bucket has RLS. | App |
+| `EXPO_PUBLIC_PRIVACY_NOTICE_URL` | Address of the hosted Privacy Notice (Section 18 #10) | Your published page | Public | App (S2, S18) |
 | `EXPO_PUBLIC_LINK_BASE_URL` | Address of the hosted link-redirect page (Section 11, Section 18 #7) | GitHub Pages address you set up | Public | App (builds invite and reset links) |
 | `SUPABASE_SERVICE_ROLE_KEY` | Admin (service role / secret) key | Same as the URL | **Secret** | `scripts/` and integration tests only. Edge Functions get it automatically from Supabase. |
 | `RESEND_API_KEY` | Email-sending key | Resend dashboard | **Secret** | `send-pending-emails` only, stored in `supabase/functions/.env` locally and in Edge Function secrets when hosted |
 | `EMAIL_MODE` | `send` or `log` | You choose | Not secret | `send-pending-emails`. Local and test: `log` (writes the email to the function log and marks it sent; never calls Resend). Hosted: `send`. |
 | `EMAIL_FROM` | Sender address, e.g. `LifeNest <hello@yourdomain>` | Your verified Resend domain | Not secret | `send-pending-emails` |
+| `APP_URL` | Address of the web app, used for links in emails (Section 18 #28) | Your Vercel address | Not secret | `send-pending-emails` |
 | `SEED_TEST_PASSWORD` | Password for all seed test accounts | You choose it | **Secret** | `scripts/seed-storage.ts`, integration tests, Maestro |
 | `SEED_TEST_PIN` | 6-digit PIN used by Maestro to set up and unlock test accounts | You choose it | **Secret** (test only) | Maestro |
 
@@ -297,6 +299,7 @@ EXPO_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
 SUPABASE_URL=https://your-project-ref.supabase.co
 EXPO_PUBLIC_SUPABASE_ANON_KEY=replace-with-anon-key
 EXPO_PUBLIC_LINK_BASE_URL=https://your-username.github.io/lifenest-links
+EXPO_PUBLIC_PRIVACY_NOTICE_URL=https://your-username.github.io/lifenest-links/privacy
 SUPABASE_SERVICE_ROLE_KEY=replace-with-service-role-key-never-commit
 SEED_TEST_PASSWORD=replace-with-a-test-only-password
 SEED_TEST_PIN=replace-with-6-digits
@@ -1666,7 +1669,7 @@ All tests in this phase are pgTAP tests in `supabase/tests/`.
 
 | Phase | Date | Status | Automated tests (passed / total) | Commit | Notes |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 8 Nov 2026 | In progress: waiting for `supabase login` + link (T-SETUP-2) and Maestro (T-SETUP-4) | Unit + component: 60 / 60 (incl. T-WEB-1). Integration: 1 / 1 (T-SETUP-3 against lifenest-dev). Lint and type check clean. Android and web bundles build. Database: not run yet (project not linked). | — | Expo SDK 58.0.23, React 19.3.0, React Native 0.88.1, three 0.187.0, @react-three/fiber 9.8.2, expo-gl 58.0.4, react-dom 19.3.0 (peer of R3F), NativeWind 4.2.7 (latest stable; officially lists SDK 57, works here), Tailwind 3.4.19, Jest 30.5 + jest-expo 58, @testing-library/react-native 14.1 (async render API), Supabase CLI 3.0.0, Node 22.14. `app/index.tsx` redirects to S1 until Phase 3. |
+| All (web) | 9 Nov 2026 | Built (Section 18 #29): all screens S1–S21, M1–M4; migrations 0001–0008 pushed to lifenest-dev; Edge Functions deployed. Waiting for the human: OK to run pgTAP on the hosted project; Auth settings push; manual checks | Unit + component: 60 / 60 (incl. T-WEB-1). Integration: 1 / 1 (T-SETUP-3 against lifenest-dev). Lint and type check clean. Android and web bundles build. Database: not run yet (project not linked). | — | Expo SDK 58.0.23, React 19.3.0, React Native 0.88.1, three 0.187.0, @react-three/fiber 9.8.2, expo-gl 58.0.4, react-dom 19.3.0 (peer of R3F), NativeWind 4.2.7 (latest stable; officially lists SDK 57, works here), Tailwind 3.4.19, Jest 30.5 + jest-expo 58, @testing-library/react-native 14.1 (async render API), Supabase CLI 3.0.0, Node 22.14. `app/index.tsx` redirects to S1 until Phase 3. Web fixes: Tailwind `darkMode: 'class'` (NativeWind threw on web because app.json forces light mode); `aria-hidden` instead of legacy accessibility props on SVGs; Expo Router typed routes off until the Phase 3 routes exist. |
 
 ---
 
@@ -1704,6 +1707,10 @@ All tests in this phase are pgTAP tests in `supabase/tests/`.
 | 26 | Maestro is not installed on this computer. It needs Java and the Android emulator, but not Docker. | Section 4.2, T-SETUP-4 | Suggested: keep Maestro E2E tests as planned; the human installs Maestro. | Answered (suggestion accepted, 7 Nov 2026) |
 | 27 | Icon-only buttons and placeholders need screen-reader labels (T-NFR-3), but the PRD gives no wording for them. | Rule 9, Section 7.2 | Suggested labels: "Show password" / "Hide password" (TextField eye), "Delete" and "Use fingerprint" (PinPad keys), "Loading" (Skeleton), "2 of 6" (PinPad dots), "Vault door" (from Section 7.4). | Proposed |
 | 28 | The human wants a web version now, deployable to Render or Vercel. Section 3.3 lists the web version as deferred, and several BR9/security features are phone-only: fingerprint unlock, `expo-secure-store` for the PIN hash (a browser can only use weaker storage), screenshot blocking on S9/S20, and Maestro E2E. | Section 3.3, BR9, Section 9 (on the phone), 4.1 | Open: (a) add web as an extra preview target of the same Expo app (static `expo export --platform web`; Android stays primary; phone-only features are skipped on web), or (b) switch to web-first and rewrite the plan. Also: Vercel or Render. | Answered (8 Nov 2026): option (a), web as an extra preview target of the same Expo app, deployed as a static single-page site on Vercel (`vercel.json`). Android stays primary. Phone-only features (fingerprint, secure PIN storage, screenshot blocking, Maestro) are Android-only; how each behaves on web is decided in its phase. |
+| 29 | The human asked (8 Nov 2026) to stop working phase by phase and to build and finish the whole **web** application now. | Section 2 Rule 1, Section 13 | Answered by the human: build all features F1–F8 now, web first (Vercel). Tests stay (written before code where practical), all security rules (Section 9) stay enforced in the database. One commit when the app is complete, unless the human asks for earlier commits. | Answered |
+| 30 | The S2–S21 designs contain marketing text that is not in the PRD and partly untrue for the MVP ("256-bit vault", "Zero knowledge", "End-to-end encrypted", "Hardware keystore backed"). | Rule 9, Section 3.3 | Decided by the agent, following #17: keep each design's layout and plain headings (e.g. "Create your account", "Welcome back"); use PRD wording for every label and message; drop badges and security claims. The human can change this. | Answered (agent default) |
+| 31 | Web-only gaps: no fingerprint in a browser; no screenshot blocking; `expo-secure-store` does not exist on web; Storage refuses deletes without a select policy. | BR9, SEC18, S9, S20 | Decided by the agent: on web the PIN hash (salted SHA-256) is kept in the browser's localStorage; the fingerprint switch is hidden when the device has no biometrics; screenshot blocking is skipped on web. Owners may read (sign links for) only their own `vault` folder, which Storage needs for deletes; contacts still open files only through `get-file-link`. | Answered (agent default) |
+| 32 | Storage no longer allows deleting files from SQL, so `run_hourly_jobs()` cannot remove proof files 12 months after a request closes (Section 8.5 step 4, POPIA). | Section 8.5, PRD 12 POPIA | Open: add a small scheduled Edge Function that removes those files with the Storage API (not built yet). | Open |
 
 ---
 

@@ -16,7 +16,7 @@ type Props = {
 export function EmptyState({ text, icon: Icon = FolderOpen, buttonLabel, onButtonPress }: Props) {
   return (
     <View style={styles.wrapper}>
-      <View testID="empty-state-illustration" importantForAccessibility="no-hide-descendants">
+      <View testID="empty-state-illustration" aria-hidden>
         <Icon color={tokens.color.accent} size={tokens.size.touchMin + tokens.space[4]} strokeWidth={1.25} />
       </View>
       <Text style={styles.text}>{text}</Text>

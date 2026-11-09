@@ -7,6 +7,9 @@ export default {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   presets: [require('nativewind/preset')],
+  // Dark mode is deferred (Section 3.3) and app.json forces light. 'class' stops
+  // NativeWind on web from throwing when Expo sets the colour scheme.
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

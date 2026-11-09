@@ -11,7 +11,7 @@ export function Logo() {
   const gold = tokens.color.accent;
   return (
     <View style={styles.row}>
-      <Svg width={ICON} height={ICON} viewBox="0 0 40 40" accessibilityElementsHidden importantForAccessibility="no">
+      <Svg width={ICON} height={ICON} viewBox="0 0 40 40" aria-hidden>
         {/* Open ring, gap at the top */}
         <Path d="M14 4.5 A16 16 0 1 0 26 4.5" stroke={gold} strokeWidth={2.5} fill="none" strokeLinecap="round" />
         {/* The egg / person */}
