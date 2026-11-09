@@ -11,6 +11,13 @@ export function appBaseUrl(): string {
   return process.env.EXPO_PUBLIC_LINK_BASE_URL ?? '';
 }
 
+/** Supabase rate limits: the email sender limit (Section 18 #35) or too many requests. */
+function rateLimitMessage(error: { status?: number; code?: string }): string | null {
+  if (error.code === 'over_email_send_rate_limit') return messages.emailLimit;
+  if (error.status === 429 || error.code === 'over_request_rate_limit') return messages.tooManyAttempts;
+  return null;
+}
+
 export type AuthResult = { ok: true } | { ok: false; message: string; code?: 'email_taken' | 'unverified' };
 
 /** OP1 Sign up (PRD 5). */
@@ -24,7 +31,8 @@ export async function signUp(email: string, password: string): Promise<AuthResul
     if (/already registered|already exists/i.test(error.message)) {
       return { ok: false, code: 'email_taken', message: messages.emailTaken };
     }
-    if (error.status === 429) return { ok: false, message: messages.tooManyAttempts };
+    const limited = rateLimitMessage(error as { status?: number; code?: string });
+    if (limited) return { ok: false, message: limited };
     return { ok: false, message: messages.serverError };
   }
   // With email confirmation on, an existing address comes back with no identities.
@@ -45,9 +53,8 @@ export async function logIn(email: string, password: string): Promise<AuthResult
   if (code === 'email_not_confirmed' || /not confirmed/i.test(error.message)) {
     return { ok: false, code: 'unverified', message: messages.verifyFirst };
   }
-  if (error.status === 429 || code === 'over_request_rate_limit') {
-    return { ok: false, message: messages.tooManyAttempts };
-  }
+  const limited = rateLimitMessage({ status: error.status, code });
+  if (limited) return { ok: false, message: limited };
   if (code === 'invalid_credentials' || error.status === 400) {
     return { ok: false, message: messages.wrongPassword };
   }

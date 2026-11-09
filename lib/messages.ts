@@ -16,6 +16,8 @@ export const messages = {
   verifyBanner: 'Check your email and tap the link to verify your account.',
   verifyFirst: 'Please verify your email first.',
   tooManyAttempts: 'Too many attempts. Try again in 15 minutes.',
+  // Section 18 #35: the email service limit is not the user's fault and lasts up to an hour.
+  emailLimit: 'We can’t send your email right now. Please try again in an hour.',
   wrongPassword: 'Incorrect email or password.',
   resetSent: 'If an account exists for this email, we’ve sent a reset link.',
   passwordRule: 'At least 10 characters, including a number and a letter.',
