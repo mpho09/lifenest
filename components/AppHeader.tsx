@@ -2,12 +2,22 @@ import { Lock } from 'lucide-react-native';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useSession } from '../lib/session';
+import { useIsWide } from '../lib/useLayout';
 import { tokens } from '../theme/tokens';
 import { Logo } from './Logo';
 
 /** Top bar on tab screens: logo or greeting on the left, lock icon on the right (locks at once → S6). */
 export function AppHeader({ greeting }: { greeting?: string }) {
   const { lock } = useSession();
+  const wide = useIsWide();
+  // On wide screens the sidebar already shows the logo and the lock (Section 18 #34).
+  if (wide) {
+    return greeting ? (
+      <Text style={styles.greeting} accessibilityRole="header">
+        {greeting}
+      </Text>
+    ) : null;
+  }
   return (
     <View style={styles.bar}>
       {greeting ? (

@@ -102,7 +102,7 @@ export default function EditContact() {
   const toggleSection = (key: string) => setSections((s) => (s.includes(key) ? s.filter((x) => x !== key) : [...s, key]));
 
   return (
-    <Screen
+    <Screen width="narrow"
       footer={
         <Button
           title={editing ? labels.save : labels.sendInvite}

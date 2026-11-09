@@ -45,5 +45,6 @@ describe('design tokens (Section 7.1)', () => {
     expect(tokens.shadow.card).toBe('0px 1px 3px rgba(0, 0, 0, 0.08)');
     expect(tokens.size).toEqual({ button: 48, touchMin: 48 });
     expect(tokens.three).toEqual({ minFps: 30 });
+    expect(tokens.layout).toEqual({ wideBreakpoint: 900, sidebar: 256, content: 1120, narrow: 640 });
   });
 });

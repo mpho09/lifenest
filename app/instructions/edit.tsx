@@ -64,7 +64,7 @@ export default function WriteInstruction() {
   };
 
   return (
-    <Screen footer={<Button title={labels.save} onPress={save} loading={busy} disabled={!valid || offline} />}>
+    <Screen width="narrow" footer={<Button title={labels.save} onPress={save} loading={busy} disabled={!valid || offline} />}>
       <Header />
       <Title>{params.id ? 'Edit' : 'Write'}</Title>
       {error ? <Banner tone="error" text={error} /> : null}

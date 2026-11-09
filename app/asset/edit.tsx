@@ -94,7 +94,7 @@ export default function EditAsset() {
   const toggle = (id: string) => setLinked((l) => (l.includes(id) ? l.filter((x) => x !== id) : [...l, id]));
 
   return (
-    <Screen footer={<Button title={labels.save} onPress={save} loading={busy} disabled={!valid || offline} />}>
+    <Screen width="narrow" footer={<Button title={labels.save} onPress={save} loading={busy} disabled={!valid || offline} />}>
       <Header />
       <Title>{editing ? 'Edit asset' : 'Add an asset'}</Title>
       {error ? <Banner tone="error" text={error} /> : null}

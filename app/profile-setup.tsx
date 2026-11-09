@@ -95,7 +95,7 @@ export default function ProfileSetup() {
   const pinStep = confirmed ? 'done' : firstPin ? 'confirm' : 'create';
 
   return (
-    <Screen>
+    <Screen width="narrow">
       {changingPin ? <Header /> : null}
       <Title subtitle={changingPin ? undefined : 'Add a few details and a PIN to protect your LifeNest account.'}>
         {changingPin ? labels.changePin : 'Let’s set up your vault.'}

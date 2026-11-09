@@ -79,7 +79,7 @@ export default function RequestAccess() {
   const canSubmit = !!reason && !!proof && !!idCopy && declared && !offline;
 
   return (
-    <Screen footer={<Button title={labels.submitRequest} onPress={submit} loading={busy} disabled={!canSubmit} />}>
+    <Screen width="narrow" footer={<Button title={labels.submitRequest} onPress={submit} loading={busy} disabled={!canSubmit} />}>
       <Header />
       <Title subtitle={ownerName ? `Ask for access to ${ownerName}’s information.` : undefined}>{labels.requestAccess}</Title>
       <Banner

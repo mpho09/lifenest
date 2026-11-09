@@ -3,6 +3,7 @@ import { Ellipsis, FileText, House, Landmark, Users, type LucideIcon } from 'luc
 import { StyleSheet, View } from 'react-native';
 
 import { useNotifications, useOpenRequest } from '../../lib/queries';
+import { useIsWide } from '../../lib/useLayout';
 import { tokens } from '../../theme/tokens';
 
 function TabIcon({ Icon, focused, dot }: { Icon: LucideIcon; focused: boolean; dot?: boolean }) {
@@ -21,6 +22,8 @@ function TabIcon({ Icon, focused, dot }: { Icon: LucideIcon; focused: boolean; d
 
 /** Tab bar (Section 7.2, T-C-9): Home, Documents, Assets, People, More. Gold dot on Home (T-C-9b). */
 export default function TabLayout() {
+  // On wide screens the sidebar replaces the bottom tab bar (Section 18 #34).
+  const wide = useIsWide();
   const notifications = useNotifications();
   const open = useOpenRequest();
   const hasAlert =
@@ -34,16 +37,21 @@ export default function TabLayout() {
         tabBarActiveTintColor: tokens.color.primary,
         tabBarInactiveTintColor: tokens.color.textSecondary,
         tabBarLabelStyle: { ...tokens.font.small, fontSize: tokens.font.small.fontSize - 2 },
-        tabBarStyle: {
-          backgroundColor: tokens.color.surface,
-          borderTopColor: tokens.color.divider,
-          minHeight: tokens.size.touchMin + tokens.space[4],
-        },
+        tabBarStyle: wide
+          ? { display: 'none' }
+          : {
+              backgroundColor: tokens.color.surface,
+              borderTopColor: tokens.color.divider,
+              minHeight: tokens.size.touchMin + tokens.space[4],
+            },
       }}
     >
       <Tabs.Screen
         name="index"
-        options={{ title: 'Home', tabBarIcon: ({ focused }) => <TabIcon Icon={House} focused={focused} dot={hasAlert} /> }}
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ focused }) => <TabIcon Icon={House} focused={focused} dot={hasAlert} />,
+        }}
       />
       <Tabs.Screen
         name="documents"

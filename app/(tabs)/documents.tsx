@@ -9,7 +9,7 @@ import { EmptyState } from '../../components/EmptyState';
 import { CategoryRow, DocumentRow } from '../../components/rows';
 import { Skeleton } from '../../components/Skeleton';
 import { Toast } from '../../components/Toast';
-import { Banner, Card, Row, Screen, Title } from '../../components/ui';
+import { Grid, Banner, Card, Row, Screen, Title } from '../../components/ui';
 import { labels, messages } from '../../lib/messages';
 import { useDocuments, useRefreshAll } from '../../lib/queries';
 import { CATEGORIES } from '../../lib/rules/categories';
@@ -31,7 +31,10 @@ export default function Documents() {
   }, [typed]);
 
   const all = useMemo(() => documents.data ?? [], [documents.data]);
-  const matches = useMemo(() => (search ? all.filter((d) => d.title.toLowerCase().includes(search)) : all), [all, search]);
+  const matches = useMemo(
+    () => (search ? all.filter((d) => d.title.toLowerCase().includes(search)) : all),
+    [all, search],
+  );
 
   return (
     <Screen onRefresh={refreshAll} refreshing={documents.isRefetching}>
@@ -60,7 +63,12 @@ export default function Documents() {
       </View>
 
       {documents.isError && !documents.data ? (
-        <Banner tone="error" text={messages.serverError} actionLabel={labels.tryAgain} onAction={() => documents.refetch()} />
+        <Banner
+          tone="error"
+          text={messages.serverError}
+          actionLabel={labels.tryAgain}
+          onAction={() => documents.refetch()}
+        />
       ) : documents.isLoading ? (
         <Card>
           {[0, 1, 2, 3].map((i) => (
@@ -71,30 +79,55 @@ export default function Documents() {
         matches.length ? (
           <Card>
             {matches.map((d) => (
-              <DocumentRow key={d.id} title={d.title} category={d.category} fileType={d.file_type} createdAt={d.created_at} onPress={() => router.push(`/document/${d.id}`)} />
+              <DocumentRow
+                key={d.id}
+                title={d.title}
+                category={d.category}
+                fileType={d.file_type}
+                createdAt={d.created_at}
+                onPress={() => router.push(`/document/${d.id}`)}
+              />
             ))}
           </Card>
         ) : (
           <EmptyState icon={Search} text={messages.noDocumentsFound} />
         )
       ) : (
-        CATEGORIES.map((c) => {
-          const docs = all.filter((d) => d.category === c.key);
-          const open = expanded[c.key] ?? docs.length > 0;
-          return (
-            <Card key={c.key}>
-              <CategoryRow category={c.key} count={docs.length} expanded={open} onToggle={() => setExpanded((e) => ({ ...e, [c.key]: !open }))} />
-              {open
-                ? docs.map((d) => (
-                    <DocumentRow key={d.id} title={d.title} category={d.category} fileType={d.file_type} createdAt={d.created_at} onPress={() => router.push(`/document/${d.id}`)} />
-                  ))
-                : null}
-              {open && docs.length === 0 ? (
-                <Button title="Add" variant="secondary" onPress={() => router.push(`/document/edit?category=${c.key}`)} />
-              ) : null}
-            </Card>
-          );
-        })
+        <Grid>
+          {CATEGORIES.map((c) => {
+            const docs = all.filter((d) => d.category === c.key);
+            const open = expanded[c.key] ?? docs.length > 0;
+            return (
+              <Card key={c.key}>
+                <CategoryRow
+                  category={c.key}
+                  count={docs.length}
+                  expanded={open}
+                  onToggle={() => setExpanded((e) => ({ ...e, [c.key]: !open }))}
+                />
+                {open
+                  ? docs.map((d) => (
+                      <DocumentRow
+                        key={d.id}
+                        title={d.title}
+                        category={d.category}
+                        fileType={d.file_type}
+                        createdAt={d.created_at}
+                        onPress={() => router.push(`/document/${d.id}`)}
+                      />
+                    ))
+                  : null}
+                {open && docs.length === 0 ? (
+                  <Button
+                    title="Add"
+                    variant="secondary"
+                    onPress={() => router.push(`/document/edit?category=${c.key}`)}
+                  />
+                ) : null}
+              </Card>
+            );
+          })}
+        </Grid>
       )}
 
       {toast ? <Toast key={toast} message={toast} /> : null}

@@ -86,6 +86,9 @@ const styles = StyleSheet.create({
     backgroundColor: `${tokens.color.text}7A`, // color.text at 48% opacity (DESIGN.md modal scrim)
   },
   sheet: {
+    width: '100%',
+    maxWidth: tokens.layout.narrow * 0.75,
+    alignSelf: 'center',
     backgroundColor: tokens.color.surface,
     borderRadius: tokens.radius.card,
     padding: tokens.space[6],

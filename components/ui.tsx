@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useIsWide } from '../lib/useLayout';
 import { tokens } from '../theme/tokens';
 import { OfflineBanner } from './OfflineBanner';
 
@@ -28,7 +29,10 @@ export function Screen({
   refreshing,
   onRefresh,
   footer,
+  width = 'wide',
 }: {
+  /** 'narrow' keeps forms and sign-in pages in a centred 640 px column on wide screens. */
+  width?: 'wide' | 'narrow';
   children: ReactNode;
   scroll?: boolean;
   offlineBanner?: boolean;
@@ -36,17 +40,20 @@ export function Screen({
   onRefresh?: () => void;
   footer?: ReactNode;
 }) {
+  const wide = useIsWide();
+  const inner = [styles.inner, wide && { maxWidth: width === 'narrow' ? tokens.layout.narrow : tokens.layout.content }];
+  const content = [styles.scrollContent, wide && styles.scrollContentWide];
   const body = scroll ? (
     <ScrollView
-      contentContainerStyle={styles.scrollContent}
+      contentContainerStyle={content}
       keyboardShouldPersistTaps="handled"
       refreshControl={onRefresh ? <RefreshControl refreshing={!!refreshing} onRefresh={onRefresh} /> : undefined}
     >
-      <View style={styles.inner}>{children}</View>
+      <View style={inner}>{children}</View>
     </ScrollView>
   ) : (
-    <View style={[styles.scrollContent, styles.flex]}>
-      <View style={[styles.inner, styles.flex]}>{children}</View>
+    <View style={[content, styles.flex]}>
+      <View style={[inner, styles.flex]}>{children}</View>
     </View>
   );
   return (
@@ -54,7 +61,11 @@ export function Screen({
       {offlineBanner && <OfflineBanner />}
       <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         {body}
-        {footer ? <View style={styles.footer}><View style={styles.inner}>{footer}</View></View> : null}
+        {footer ? (
+          <View style={styles.footer}>
+            <View style={inner}>{footer}</View>
+          </View>
+        ) : null}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -145,15 +156,23 @@ export function Banner({
       <Icon color={c.fg} size={20} />
       <View style={styles.flex}>
         <Text style={[styles.body, { color: tone === 'info' ? tokens.color.text : c.fg }]}>{text}</Text>
-        {actionLabel && onAction ? (
-          <LinkButton label={actionLabel} onPress={onAction} color={c.fg} />
-        ) : null}
+        {actionLabel && onAction ? <LinkButton label={actionLabel} onPress={onAction} color={c.fg} /> : null}
       </View>
     </View>
   );
 }
 
-export function LinkButton({ label, onPress, color = tokens.color.primary, disabled }: { label: string; onPress: () => void; color?: string; disabled?: boolean }) {
+export function LinkButton({
+  label,
+  onPress,
+  color = tokens.color.primary,
+  disabled,
+}: {
+  label: string;
+  onPress: () => void;
+  color?: string;
+  disabled?: boolean;
+}) {
   return (
     <Pressable
       accessibilityRole="button"
@@ -168,7 +187,17 @@ export function LinkButton({ label, onPress, color = tokens.color.primary, disab
   );
 }
 
-export function Checkbox({ label, checked, onChange, children }: { label: string; checked: boolean; onChange: (v: boolean) => void; children?: ReactNode }) {
+export function Checkbox({
+  label,
+  checked,
+  onChange,
+  children,
+}: {
+  label: string;
+  checked: boolean;
+  onChange: (v: boolean) => void;
+  children?: ReactNode;
+}) {
   return (
     <Pressable
       accessibilityRole="checkbox"
@@ -185,7 +214,17 @@ export function Checkbox({ label, checked, onChange, children }: { label: string
   );
 }
 
-export function SwitchRow({ label, description, value, onChange }: { label: string; description?: string; value: boolean; onChange: (v: boolean) => void }) {
+export function SwitchRow({
+  label,
+  description,
+  value,
+  onChange,
+}: {
+  label: string;
+  description?: string;
+  value: boolean;
+  onChange: (v: boolean) => void;
+}) {
   return (
     <View style={styles.switchRow}>
       <View style={styles.flex}>
@@ -239,6 +278,41 @@ export function Choices<K extends string>({
   );
 }
 
+/** Web layout (Section 18 #34): cards in 2 or 3 columns on wide screens, one column on phones. */
+export function Grid({ children, columns = 2 }: { children: ReactNode; columns?: 2 | 3 }) {
+  const wide = useIsWide();
+  if (!wide) return <View style={styles.stack}>{children}</View>;
+  const items = Array.isArray(children) ? children.flat() : [children];
+  return (
+    <View style={styles.grid}>
+      {items.filter(Boolean).map((child, i) => (
+        <View key={i} style={[styles.gridItem, { flexBasis: columns === 3 ? '30%' : '45%' }]}>
+          {child}
+        </View>
+      ))}
+    </View>
+  );
+}
+
+/** Two columns side by side on wide screens (main content and a side panel); stacked on phones. */
+export function Columns({ main, side }: { main: ReactNode; side: ReactNode }) {
+  const wide = useIsWide();
+  if (!wide) {
+    return (
+      <View style={styles.stack}>
+        {main}
+        {side}
+      </View>
+    );
+  }
+  return (
+    <View style={styles.columns}>
+      <View style={styles.mainColumn}>{main}</View>
+      <View style={styles.sideColumn}>{side}</View>
+    </View>
+  );
+}
+
 export function Row({ children, style }: { children: ReactNode; style?: ViewStyle }) {
   return <View style={[styles.row, style]}>{children}</View>;
 }
@@ -259,6 +333,17 @@ const styles = StyleSheet.create({
   ...ui,
   screen: { flex: 1, backgroundColor: tokens.color.background },
   scrollContent: { flexGrow: 1, paddingHorizontal: tokens.space.screen, paddingBottom: tokens.space[6] },
+  scrollContentWide: {
+    paddingHorizontal: tokens.space[6] * 2,
+    paddingTop: tokens.space[6],
+    paddingBottom: tokens.space[6] * 2,
+  },
+  stack: { gap: tokens.space[4] },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: tokens.space[4], alignItems: 'flex-start' },
+  gridItem: { flexGrow: 1, minWidth: tokens.layout.narrow / 2 },
+  columns: { flexDirection: 'row', gap: tokens.space[6], alignItems: 'flex-start' },
+  mainColumn: { flex: 3, gap: tokens.space[4] },
+  sideColumn: { flex: 2, gap: tokens.space[4] },
   inner: { width: '100%', maxWidth: MAX_CONTENT_WIDTH, alignSelf: 'center', gap: tokens.space[4] },
   footer: {
     paddingHorizontal: tokens.space.screen,
@@ -267,14 +352,31 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: tokens.color.divider,
   },
-  header: { flexDirection: 'row', alignItems: 'center', minHeight: tokens.size.touchMin, gap: tokens.space[2], paddingTop: tokens.space[2] },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    minHeight: tokens.size.touchMin,
+    gap: tokens.space[2],
+    paddingTop: tokens.space[2],
+  },
   headerTitle: { ...tokens.font.section, color: tokens.color.text, flex: 1 },
   headerRight: { flexDirection: 'row', alignItems: 'center', gap: tokens.space[2] },
-  iconButton: { width: tokens.size.touchMin, height: tokens.size.touchMin, alignItems: 'center', justifyContent: 'center', marginLeft: -tokens.space[2] },
+  iconButton: {
+    width: tokens.size.touchMin,
+    height: tokens.size.touchMin,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: -tokens.space[2],
+  },
   titleBlock: { gap: tokens.space[1] },
   title: { ...tokens.font.title, color: tokens.color.text },
   subtitle: { ...tokens.font.body, color: tokens.color.textSecondary },
-  sectionRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: tokens.space[2] },
+  sectionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: tokens.space[2],
+  },
   section: { ...tokens.font.section, color: tokens.color.text },
   card: {
     backgroundColor: tokens.color.surface,

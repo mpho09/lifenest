@@ -7,7 +7,7 @@ import { Button } from '../../../components/Button';
 import { useIsOffline } from '../../../components/OfflineBanner';
 import { AssetRow, DocumentRow, StatusChip } from '../../../components/rows';
 import { Skeleton } from '../../../components/Skeleton';
-import { Banner, Card, Header, Row, Screen, SectionTitle, Small, Title } from '../../../components/ui';
+import { Banner, Card, Grid, Header, Row, Screen, SectionTitle, Small, Title } from '../../../components/ui';
 import { getFileLink } from '../../../lib/api/documents';
 import type { SharedVault as Vault } from '../../../lib/api/types';
 import { messageForError } from '../../../lib/errors';
@@ -34,7 +34,9 @@ function EmergencyCard({ profile }: { profile: NonNullable<Vault['emergency_prof
       {profile.medical_aid_provider ? (
         <View>
           <Small>Medical aid</Small>
-          <Text style={styles.body}>{[profile.medical_aid_provider, profile.medical_aid_number].filter(Boolean).join(' · ')}</Text>
+          <Text style={styles.body}>
+            {[profile.medical_aid_provider, profile.medical_aid_number].filter(Boolean).join(' · ')}
+          </Text>
         </View>
       ) : null}
       {profile.key_notes ? <Text style={styles.body}>{profile.key_notes}</Text> : null}
@@ -102,7 +104,9 @@ export default function SharedVault() {
   else if (req?.status === 'rejected') status = { chip: 'rejected', text: messages.requestRejected };
   else if (req?.status === 'cancelled') status = { text: messages.requestCancelledByOwner };
 
-  const sectionsShown = Array.from(new Set([...v.documents.map((d) => d.category), ...v.assets.map((a) => a.category)]));
+  const sectionsShown = Array.from(
+    new Set([...v.documents.map((d) => d.category), ...v.assets.map((a) => a.category)]),
+  );
 
   return (
     <Screen onRefresh={refreshAll} refreshing={vault.isRefetching}>
@@ -112,7 +116,11 @@ export default function SharedVault() {
       {fileError ? <Banner tone="error" text={fileError} /> : null}
 
       {!released && canRequest && !myOpen && !v.other_request_open ? (
-        <Button title={labels.requestAccess} disabled={offline} onPress={() => router.push(`/shared/${ownerId}/request`)} />
+        <Button
+          title={labels.requestAccess}
+          disabled={offline}
+          onPress={() => router.push(`/shared/${ownerId}/request`)}
+        />
       ) : null}
 
       {v.emergency_profile ? <EmergencyCard profile={v.emergency_profile} /> : null}
@@ -130,38 +138,59 @@ export default function SharedVault() {
             </Card>
           ))}
 
-          {sectionsShown.map((cat) => (
-            <View key={cat} style={styles.group}>
-              <SectionTitle>{categoryLabel(cat)}</SectionTitle>
-              <Card>
-                {v.documents
-                  .filter((d) => d.category === cat)
-                  .map((d) => (
-                    <Row key={d.id}>
-                      <View style={styles.flex}>
-                        <DocumentRow title={d.title} category={d.category} fileType={d.file_type} createdAt={d.created_at} />
+          <Grid>
+            {sectionsShown.map((cat) => (
+              <View key={cat} style={styles.group}>
+                <SectionTitle>{categoryLabel(cat)}</SectionTitle>
+                <Card>
+                  {v.documents
+                    .filter((d) => d.category === cat)
+                    .map((d) => (
+                      <Row key={d.id}>
+                        <View style={styles.flex}>
+                          <DocumentRow
+                            title={d.title}
+                            category={d.category}
+                            fileType={d.file_type}
+                            createdAt={d.created_at}
+                          />
+                        </View>
+                        <Pressable
+                          accessibilityRole="button"
+                          accessibilityLabel={`${labels.view} ${d.title}`}
+                          onPress={() => openFile(d.id, 'view')}
+                          style={styles.icon}
+                          disabled={offline}
+                        >
+                          <Eye color={tokens.color.primary} size={20} />
+                        </Pressable>
+                        <Pressable
+                          accessibilityRole="button"
+                          accessibilityLabel={`${labels.download} ${d.title}`}
+                          onPress={() => openFile(d.id, 'download')}
+                          style={styles.icon}
+                          disabled={offline}
+                        >
+                          <Download color={tokens.color.primary} size={20} />
+                        </Pressable>
+                      </Row>
+                    ))}
+                  {v.assets
+                    .filter((a) => a.category === cat)
+                    .map((a) => (
+                      <View key={a.id}>
+                        <AssetRow asset={a} />
+                        {[a.provider_phone, a.reference_number, a.originals_location, a.notes]
+                          .filter(Boolean)
+                          .map((line, i) => (
+                            <Small key={i}>{line}</Small>
+                          ))}
                       </View>
-                      <Pressable accessibilityRole="button" accessibilityLabel={`${labels.view} ${d.title}`} onPress={() => openFile(d.id, 'view')} style={styles.icon} disabled={offline}>
-                        <Eye color={tokens.color.primary} size={20} />
-                      </Pressable>
-                      <Pressable accessibilityRole="button" accessibilityLabel={`${labels.download} ${d.title}`} onPress={() => openFile(d.id, 'download')} style={styles.icon} disabled={offline}>
-                        <Download color={tokens.color.primary} size={20} />
-                      </Pressable>
-                    </Row>
-                  ))}
-                {v.assets
-                  .filter((a) => a.category === cat)
-                  .map((a) => (
-                    <View key={a.id}>
-                      <AssetRow asset={a} />
-                      {[a.provider_phone, a.reference_number, a.originals_location, a.notes].filter(Boolean).map((line, i) => (
-                        <Small key={i}>{line}</Small>
-                      ))}
-                    </View>
-                  ))}
-              </Card>
-            </View>
-          ))}
+                    ))}
+                </Card>
+              </View>
+            ))}
+          </Grid>
 
           {v.instructions.length ? (
             <View style={styles.group}>
@@ -176,7 +205,9 @@ export default function SharedVault() {
           ) : null}
         </>
       ) : !v.emergency_profile && !status.text ? (
-        <Small>Nothing is shared yet. Information is released only after a checked request and a 7-day waiting period.</Small>
+        <Small>
+          Nothing is shared yet. Information is released only after a checked request and a 7-day waiting period.
+        </Small>
       ) : null}
     </Screen>
   );

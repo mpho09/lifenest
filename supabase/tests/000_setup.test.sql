@@ -6,5 +6,5 @@ select plan(1);
 
 select has_schema('public', 'T-SETUP-2 the public schema exists');
 
-select * from finish();
+select * from finish(true); -- raises on any failure, so the run exits non-zero
 rollback;

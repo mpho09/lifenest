@@ -80,7 +80,7 @@ export default function Unlock() {
   };
 
   return (
-    <Screen>
+    <Screen width="narrow">
       <View style={styles.top}>
         <Logo />
       </View>

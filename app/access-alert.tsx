@@ -31,7 +31,7 @@ export default function AccessAlert() {
 
   if (open.isLoading) {
     return (
-      <Screen>
+      <Screen width="narrow">
         <Header onBack={goHome} />
         <Skeleton variant="line" />
         <Skeleton variant="row" />
@@ -42,7 +42,7 @@ export default function AccessAlert() {
   const r = open.data;
   if (!r) {
     return (
-      <Screen>
+      <Screen width="narrow">
         <Header onBack={goHome} />
         {open.isError ? (
           <Banner tone="error" text={messages.serverError} actionLabel={labels.tryAgain} onAction={() => open.refetch()} />
@@ -55,7 +55,7 @@ export default function AccessAlert() {
 
   if (r.status === 'released' && r.released_at) {
     return (
-      <Screen>
+      <Screen width="narrow">
         <Header onBack={goHome} />
         <Title subtitle="Your trusted contacts can see your information at their access level.">
           {messages.releasedOn(formatDate(r.released_at))}
@@ -75,7 +75,7 @@ export default function AccessAlert() {
   const daysLeft = Math.max(0, Math.ceil((new Date(r.waiting_ends_at).getTime() - now) / 86_400_000));
 
   return (
-    <Screen>
+    <Screen width="narrow">
       <Header onBack={goHome} />
       <Title subtitle="If you are OK, cancel this request within 7 days.">Someone has asked for access to your information</Title>
       <Card>

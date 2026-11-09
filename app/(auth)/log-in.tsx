@@ -31,7 +31,7 @@ export default function LogIn() {
   };
 
   return (
-    <Screen>
+    <Screen width="narrow">
       <View style={styles.logo}>
         <Logo />
       </View>

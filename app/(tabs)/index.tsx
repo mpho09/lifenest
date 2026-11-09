@@ -24,10 +24,17 @@ import { FlatRing } from '../../components/three/FlatRing';
 import { ReadinessRingScene } from '../../components/three/ReadinessRingScene';
 import { Scene3DGate } from '../../components/three/Scene3DGate';
 import { Toast } from '../../components/Toast';
-import { Banner, Card, Checkbox, Row, Screen, SectionTitle } from '../../components/ui';
+import { Banner, Card, Checkbox, Columns, Row, Screen, SectionTitle } from '../../components/ui';
 import { confirmReview, markNotificationRead, setOwnsNoPropertyOrVehicle } from '../../lib/api/profile';
 import { labels, messages } from '../../lib/messages';
-import { useNotifications, useOpenRequest, usePeople, useProfile, useReadiness, useRefreshAll } from '../../lib/queries';
+import {
+  useNotifications,
+  useOpenRequest,
+  usePeople,
+  useProfile,
+  useReadiness,
+  useRefreshAll,
+} from '../../lib/queries';
 import { formatDate } from '../../lib/rules/format';
 import { isReviewDue, READINESS_ITEMS, type ReadinessKey } from '../../lib/rules/readiness';
 import { tokens } from '../../theme/tokens';
@@ -106,7 +113,11 @@ export default function Home() {
         />
       ) : null}
       {open?.status === 'released' && open.released_at ? (
-        <AlertCard text={messages.releasedOn(formatDate(open.released_at))} actionLabel={labels.view} onPress={() => router.push('/access-alert')} />
+        <AlertCard
+          text={messages.releasedOn(formatDate(open.released_at))}
+          actionLabel={labels.view}
+          onPress={() => router.push('/access-alert')}
+        />
       ) : null}
 
       {reviewDue ? (
@@ -137,67 +148,72 @@ export default function Home() {
           ))}
         </Card>
       ) : (
-        <>
-          <Card>
-            <Pressable accessibilityRole="button" accessibilityLabel={`Readiness: ${messages.readinessCount(done)}`}>
-              <Scene3DGate
-                renderScene={({ onFps }) => <ReadinessRingScene done={done} active={ringActive} onFps={onFps} />}
-                fallback={<FlatRing done={done} />}
-              />
-            </Pressable>
-            {done <= 1 ? (
-              <EmptyState
-                icon={IdCard}
-                text={messages.homeEmpty}
-                buttonLabel={labels.addIdDocument}
-                onButtonPress={() => router.push('/document/edit?category=identity')}
-              />
-            ) : null}
-          </Card>
-
-          <SectionTitle>Checklist</SectionTitle>
-          <Card>
-            {READINESS_ITEMS.map((item) => {
-              const itemDone = isDone(item.key);
-              return (
-                <ChecklistRow
-                  key={item.key}
-                  label={item.label}
-                  done={itemDone}
-                  icon={ICONS[item.key]}
-                  onPress={() => router.push((itemDone ? item.done : item.todo) as never)}
-                  extra={
-                    item.key === 'property_vehicles' && !isDone('property_vehicles') ? (
-                      <View style={styles.indent}>
-                        <Checkbox
-                          label={labels.iDontOwnAny}
-                          checked={!!profile.data?.owns_no_property_or_vehicle}
-                          onChange={async (v) => {
-                            if (offline) return;
-                            await setOwnsNoPropertyOrVehicle(v).catch(() => {});
-                            refreshAll();
-                          }}
-                        />
-                      </View>
-                    ) : item.key === 'property_vehicles' && profile.data?.owns_no_property_or_vehicle ? (
-                      <View style={styles.indent}>
-                        <Checkbox
-                          label={labels.iDontOwnAny}
-                          checked
-                          onChange={async () => {
-                            if (offline) return;
-                            await setOwnsNoPropertyOrVehicle(false).catch(() => {});
-                            refreshAll();
-                          }}
-                        />
-                      </View>
-                    ) : null
-                  }
+        <Columns
+          main={
+            <Card>
+              <Pressable accessibilityRole="button" accessibilityLabel={`Readiness: ${messages.readinessCount(done)}`}>
+                <Scene3DGate
+                  renderScene={({ onFps }) => <ReadinessRingScene done={done} active={ringActive} onFps={onFps} />}
+                  fallback={<FlatRing done={done} />}
                 />
-              );
-            })}
-          </Card>
-        </>
+              </Pressable>
+              {done <= 1 ? (
+                <EmptyState
+                  icon={IdCard}
+                  text={messages.homeEmpty}
+                  buttonLabel={labels.addIdDocument}
+                  onButtonPress={() => router.push('/document/edit?category=identity')}
+                />
+              ) : null}
+            </Card>
+          }
+          side={
+            <View style={styles.side}>
+              <SectionTitle>Checklist</SectionTitle>
+              <Card>
+                {READINESS_ITEMS.map((item) => {
+                  const itemDone = isDone(item.key);
+                  return (
+                    <ChecklistRow
+                      key={item.key}
+                      label={item.label}
+                      done={itemDone}
+                      icon={ICONS[item.key]}
+                      onPress={() => router.push((itemDone ? item.done : item.todo) as never)}
+                      extra={
+                        item.key === 'property_vehicles' && !isDone('property_vehicles') ? (
+                          <View style={styles.indent}>
+                            <Checkbox
+                              label={labels.iDontOwnAny}
+                              checked={!!profile.data?.owns_no_property_or_vehicle}
+                              onChange={async (v) => {
+                                if (offline) return;
+                                await setOwnsNoPropertyOrVehicle(v).catch(() => {});
+                                refreshAll();
+                              }}
+                            />
+                          </View>
+                        ) : item.key === 'property_vehicles' && profile.data?.owns_no_property_or_vehicle ? (
+                          <View style={styles.indent}>
+                            <Checkbox
+                              label={labels.iDontOwnAny}
+                              checked
+                              onChange={async () => {
+                                if (offline) return;
+                                await setOwnsNoPropertyOrVehicle(false).catch(() => {});
+                                refreshAll();
+                              }}
+                            />
+                          </View>
+                        ) : null
+                      }
+                    />
+                  );
+                })}
+              </Card>
+            </View>
+          }
+        />
       )}
 
       {unread.length ? (
@@ -237,9 +253,15 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
+  side: { gap: tokens.space[2] },
   wrap: { flexWrap: 'wrap' },
   body: { ...tokens.font.body, color: tokens.color.text },
   meta: { ...tokens.font.small, color: tokens.color.textSecondary },
   indent: { paddingLeft: tokens.size.touchMin + tokens.space[2] },
-  update: { flexDirection: 'row', gap: tokens.space[4], paddingVertical: tokens.space[2], minHeight: tokens.size.touchMin },
+  update: {
+    flexDirection: 'row',
+    gap: tokens.space[4],
+    paddingVertical: tokens.space[2],
+    minHeight: tokens.size.touchMin,
+  },
 });

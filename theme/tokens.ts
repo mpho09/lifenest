@@ -49,6 +49,8 @@ export const tokens = {
   shadow: { card: '0px 1px 3px rgba(0, 0, 0, 0.08)' },
   size: { button: 48, touchMin: 48 },
   three: { minFps: 30 },
+  // Web layout (Section 18 #34): sidebar from this width up; content and form widths.
+  layout: { wideBreakpoint: 900, sidebar: 256, content: 1120, narrow: 640 },
 } as const;
 
 export type Tokens = typeof tokens;

@@ -61,7 +61,7 @@ export default function ForgotPassword() {
   if (recovery || mode === 'set' || mode === 'checking') {
     const ok = isValidPassword(password);
     return (
-      <Screen>
+      <Screen width="narrow">
         <Header onBack={async () => { await logOut(); endRecovery(); router.replace('/log-in'); }} />
         <Title subtitle={messages.passwordRule}>Set a new password</Title>
         {error ? <Banner tone="error" text={error} /> : null}
@@ -82,7 +82,7 @@ export default function ForgotPassword() {
   }
 
   return (
-    <Screen>
+    <Screen width="narrow">
       <Header />
       <Title subtitle="Enter the email address of your account. We’ll send you a link to reset your password.">
         Reset your password

@@ -64,7 +64,7 @@
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
     "test": "jest --testPathIgnorePatterns tests/integration",
-    "test:db": "supabase test db --remote",
+    "test:db": "tsx scripts/test-db.ts",
     "test:integration": "node --env-file=.env node_modules/jest/bin/jest.js -c jest.integration.config.js",
     "check": "npm run lint && npm run typecheck && npm test && npm run test:db && npm run test:integration",
     "web": "expo start --web",

@@ -37,7 +37,7 @@ export const messages = {
 
   // Trusted contacts (BR4, BR5)
   selfInvite: 'You can’t add yourself.',
-  contactLimit: 'You can have up to 5 trusted contacts.',
+  contactLimit: 'You can have up to 3 trusted contacts.',
   duplicateContact: 'This person is already one of your trusted contacts.',
   inviteExpired: 'This invitation has expired. Ask the person to send it again.',
   emergencyLevelNote: 'Can see your emergency profile only, if you share it.',

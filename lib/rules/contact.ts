@@ -20,3 +20,6 @@ export function isValidSaPhone(phone: string): boolean {
   const p = phone.replace(/\s/g, '');
   return p === '' || SA_PHONE.test(p);
 }
+
+/** BR4 as changed by Section 18 #33: at most 3 invited or accepted contacts (the database enforces it too). */
+export const MAX_CONTACTS = 3;

@@ -10,16 +10,15 @@ import { useIsOffline } from '../../components/OfflineBanner';
 import { ContactCard, StatusChip } from '../../components/rows';
 import { Skeleton } from '../../components/Skeleton';
 import { Toast } from '../../components/Toast';
-import { Banner, Card, Row, Screen, SectionTitle, Small, Title } from '../../components/ui';
+import { Grid, Banner, Card, Row, Screen, SectionTitle, Small, Title } from '../../components/ui';
 import { acceptInvite, declineInvite } from '../../lib/api/contacts';
 import { messageForError } from '../../lib/errors';
 import { acceptStoredInvite } from '../../lib/invite';
 import { labels, messages } from '../../lib/messages';
 import { usePeople, useRefreshAll } from '../../lib/queries';
 import { accessLevelLabel } from '../../lib/rules/categories';
+import { MAX_CONTACTS } from '../../lib/rules/contact';
 import { tokens } from '../../theme/tokens';
-
-const MAX_CONTACTS = 5;
 
 /** S13 People (docs/designs/S13.png): my trusted contacts, invites to me, and vaults shared with me. */
 export default function People() {
@@ -64,7 +63,12 @@ export default function People() {
       {error ? <Banner tone="error" text={error} /> : null}
 
       {people.isError && !people.data ? (
-        <Banner tone="error" text={messages.serverError} actionLabel={labels.tryAgain} onAction={() => people.refetch()} />
+        <Banner
+          tone="error"
+          text={messages.serverError}
+          actionLabel={labels.tryAgain}
+          onAction={() => people.refetch()}
+        />
       ) : people.isLoading ? (
         <Card>
           {[0, 1, 2].map((i) => (
@@ -82,10 +86,20 @@ export default function People() {
               ) : (
                 <Row>
                   <View style={styles.flex}>
-                    <Button title={labels.accept} onPress={() => respond(inv.token, true)} loading={busy === inv.token} disabled={offline} />
+                    <Button
+                      title={labels.accept}
+                      onPress={() => respond(inv.token, true)}
+                      loading={busy === inv.token}
+                      disabled={offline}
+                    />
                   </View>
                   <View style={styles.flex}>
-                    <Button title={labels.decline} variant="secondary" onPress={() => respond(inv.token, false)} disabled={offline || busy === inv.token} />
+                    <Button
+                      title={labels.decline}
+                      variant="secondary"
+                      onPress={() => respond(inv.token, false)}
+                      disabled={offline || busy === inv.token}
+                    />
                   </View>
                 </Row>
               )}
@@ -94,18 +108,23 @@ export default function People() {
 
           <SectionTitle right={<Small>{`${active} of ${MAX_CONTACTS}`}</Small>}>My trusted contacts</SectionTitle>
           {contacts.length === 0 ? (
-            <EmptyState icon={UserPlus} text="Add up to 5 people you trust. You choose what each person can see." />
+            <EmptyState
+              icon={UserPlus}
+              text={`Add up to ${MAX_CONTACTS} people you trust. You choose what each person can see.`}
+            />
           ) : (
-            contacts.map((c) => (
-              <ContactCard
-                key={c.id}
-                name={c.name}
-                relationship={c.relationship}
-                status={c.status}
-                accessLevel={c.access_level}
-                onPress={() => router.push(`/contact/edit?id=${c.id}`)}
-              />
-            ))
+            <Grid columns={3}>
+              {contacts.map((c) => (
+                <ContactCard
+                  key={c.id}
+                  name={c.name}
+                  relationship={c.relationship}
+                  status={c.status}
+                  accessLevel={c.access_level}
+                  onPress={() => router.push(`/contact/edit?id=${c.id}`)}
+                />
+              ))}
+            </Grid>
           )}
           <Button
             title={labels.addSomeone}
@@ -119,22 +138,28 @@ export default function People() {
           {(people.data?.shared_with_me ?? []).length === 0 ? (
             <Small>No one has shared their vault with you yet.</Small>
           ) : (
-            people.data?.shared_with_me.map((s) => (
-              <Card key={s.owner_id}>
-                <Row>
-                  <View style={styles.flex}>
-                    <Text style={styles.bodyStrong}>{s.owner_name}</Text>
-                    <Small>{accessLevelLabel(s.access_level)}</Small>
-                  </View>
-                  {s.vault_status === 'released' ? (
-                    <StatusChip status="released" />
-                  ) : s.vault_status === 'request_open' ? (
-                    <StatusChip status="request_open" />
-                  ) : null}
-                </Row>
-                <Button title={labels.view} variant="secondary" onPress={() => router.push(`/shared/${s.owner_id}`)} />
-              </Card>
-            ))
+            <Grid columns={3}>
+              {people.data?.shared_with_me.map((s) => (
+                <Card key={s.owner_id}>
+                  <Row>
+                    <View style={styles.flex}>
+                      <Text style={styles.bodyStrong}>{s.owner_name}</Text>
+                      <Small>{accessLevelLabel(s.access_level)}</Small>
+                    </View>
+                    {s.vault_status === 'released' ? (
+                      <StatusChip status="released" />
+                    ) : s.vault_status === 'request_open' ? (
+                      <StatusChip status="request_open" />
+                    ) : null}
+                  </Row>
+                  <Button
+                    title={labels.view}
+                    variant="secondary"
+                    onPress={() => router.push(`/shared/${s.owner_id}`)}
+                  />
+                </Card>
+              ))}
+            </Grid>
           )}
         </>
       )}

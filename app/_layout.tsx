@@ -7,7 +7,11 @@ import { useFonts } from 'expo-font';
 import { Stack, useGlobalSearchParams, usePathname, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import { Sidebar } from '../components/Sidebar';
+import { useIsWide } from '../lib/useLayout';
 
 import { redirectFor, SessionProvider, useSession } from '../lib/session';
 import { tokens } from '../theme/tokens';
@@ -27,12 +31,26 @@ export default function RootLayout() {
         <SessionProvider>
           <StatusBar style="dark" />
           <AuthGate />
-          <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: tokens.color.background } }}>
-            <Stack.Screen name="modals/delete-account" options={{ presentation: 'transparentModal', animation: 'fade' }} />
-            <Stack.Screen name="modals/delete-item" options={{ presentation: 'transparentModal', animation: 'fade' }} />
-            <Stack.Screen name="modals/cancel-request" options={{ presentation: 'transparentModal', animation: 'fade' }} />
-            <Stack.Screen name="modals/remove-or-close" options={{ presentation: 'transparentModal', animation: 'fade' }} />
-          </Stack>
+          <AppShell>
+            <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: tokens.color.background } }}>
+              <Stack.Screen
+                name="modals/delete-account"
+                options={{ presentation: 'transparentModal', animation: 'fade' }}
+              />
+              <Stack.Screen
+                name="modals/delete-item"
+                options={{ presentation: 'transparentModal', animation: 'fade' }}
+              />
+              <Stack.Screen
+                name="modals/cancel-request"
+                options={{ presentation: 'transparentModal', animation: 'fade' }}
+              />
+              <Stack.Screen
+                name="modals/remove-or-close"
+                options={{ presentation: 'transparentModal', animation: 'fade' }}
+              />
+            </Stack>
+          </AppShell>
         </SessionProvider>
       </SafeAreaProvider>
     </QueryClientProvider>
@@ -73,3 +91,23 @@ function AuthGate() {
 
   return null;
 }
+
+/** Web layout (Section 18 #34): a sidebar beside every logged-in page on wide screens. */
+function AppShell({ children }: { children: React.ReactNode }) {
+  const wide = useIsWide();
+  const { session, unlocked } = useSession();
+  const segments = useSegments() as string[];
+  const showSidebar = wide && !!session && unlocked && areaFor(segments) === 'app';
+  return (
+    <View style={[styles.shell, showSidebar && styles.row]}>
+      {showSidebar ? <Sidebar /> : null}
+      <View style={styles.main}>{children}</View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  shell: { flex: 1, backgroundColor: tokens.color.background },
+  row: { flexDirection: 'row' },
+  main: { flex: 1 },
+});

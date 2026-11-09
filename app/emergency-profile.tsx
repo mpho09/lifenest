@@ -66,7 +66,7 @@ export default function EmergencyProfileScreen() {
   };
 
   return (
-    <Screen footer={<Button title={labels.save} onPress={save} loading={busy} disabled={offline} />}>
+    <Screen width="narrow" footer={<Button title={labels.save} onPress={save} loading={busy} disabled={offline} />}>
       <Header />
       <Title subtitle="Emergency contacts and key provider details on one page.">{labels.emergencyProfile}</Title>
       {error ? <Banner tone="error" text={error} /> : null}

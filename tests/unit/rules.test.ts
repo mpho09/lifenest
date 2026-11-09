@@ -82,7 +82,7 @@ describe('dates (PRD 12)', () => {
 describe('error messages (PRD 12)', () => {
   it('maps database errors to the exact PRD messages and never shows raw codes', () => {
     expect(messageForError({ message: 'limit_documents' })).toBe('You can store up to 200 documents.');
-    expect(messageForError({ message: 'limit_contacts' })).toBe('You can have up to 5 trusted contacts.');
+    expect(messageForError({ message: 'limit_contacts' })).toBe('You can have up to 3 trusted contacts.');
     expect(messageForError({ message: 'self_invite' })).toBe('You can’t add yourself.');
     expect(messageForError({ code: '23505', message: 'duplicate key value violates unique constraint "trusted_contacts_owner_id_email_key"' }))
       .toBe('This person is already one of your trusted contacts.');

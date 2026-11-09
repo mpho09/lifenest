@@ -58,7 +58,7 @@ export default function SignUp() {
   };
 
   return (
-    <Screen>
+    <Screen width="narrow">
       <Header />
       <Title subtitle="Start organising what matters most.">Create your account</Title>
 

@@ -187,7 +187,7 @@ Install Expo packages with `npx expo install <package>` so their versions match 
 | Deploy server functions to the dev project | `npx supabase functions deploy` (function secrets set with `npx supabase secrets set ...`) |
 | Start the app | `npx expo start` |
 | Unit and component tests | `npm test` |
-| Database and permission tests | `npx supabase test db --remote` |
+| Database and permission tests | `npm run test:db` (= `tsx scripts/test-db.ts`: runs each pgTAP file with `supabase db query --remote`, because `supabase test db` needs Docker even for remote databases) |
 | Integration tests | `npm run test:integration` |
 | End-to-end tests | `npx expo run:android` (once per change), then `maestro test -e SEED_TEST_PASSWORD=$SEED_TEST_PASSWORD -e SEED_TEST_PIN=$SEED_TEST_PIN .maestro/` |
 | Lint | `npx expo lint` |
@@ -356,6 +356,7 @@ Rules:
 | `size.touchMin` | 48px | 9 |
 | `motion.reduce` | read from the phone's "Reduce motion" setting | 9 Accessibility note |
 | `three.minFps` | 30 | 8.2 Low-end phone state |
+| `layout.wideBreakpoint` / `layout.sidebar` / `layout.content` / `layout.narrow` | 900 / 256 / 1120 / 640 px | Section 18 #34 (web layout) |
 
 ### 7.2 Shared components
 
@@ -1669,7 +1670,7 @@ All tests in this phase are pgTAP tests in `supabase/tests/`.
 
 | Phase | Date | Status | Automated tests (passed / total) | Commit | Notes |
 | --- | --- | --- | --- | --- | --- |
-| All (web) | 9 Nov 2026 | Built (Section 18 #29): all screens S1–S21, M1–M4; migrations 0001–0008 pushed to lifenest-dev; Edge Functions deployed. Waiting for the human: OK to run pgTAP on the hosted project; Auth settings push; manual checks | Unit + component: 60 / 60 (incl. T-WEB-1). Integration: 1 / 1 (T-SETUP-3 against lifenest-dev). Lint and type check clean. Android and web bundles build. Database: not run yet (project not linked). | — | Expo SDK 58.0.23, React 19.3.0, React Native 0.88.1, three 0.187.0, @react-three/fiber 9.8.2, expo-gl 58.0.4, react-dom 19.3.0 (peer of R3F), NativeWind 4.2.7 (latest stable; officially lists SDK 57, works here), Tailwind 3.4.19, Jest 30.5 + jest-expo 58, @testing-library/react-native 14.1 (async render API), Supabase CLI 3.0.0, Node 22.14. `app/index.tsx` redirects to S1 until Phase 3. Web fixes: Tailwind `darkMode: 'class'` (NativeWind threw on web because app.json forces light mode); `aria-hidden` instead of legacy accessibility props on SVGs; Expo Router typed routes off until the Phase 3 routes exist. |
+| All (web) | 9 Nov 2026 | Built (Section 18 #29): all screens S1–S21, M1–M4; migrations 0001–0008 pushed to lifenest-dev; Edge Functions deployed. Auth settings pushed. 9 Nov 2026: trusted-contact limit changed to 3 (#33, migration 0009 pushed, pgTAP T-BR4-2 passes); web layout with sidebar, grids and narrow forms (#34). `npm run check` passes: 83 unit/component, 3/3 pgTAP files, 1 integration. Waiting for the human: manual checks | Unit + component: 60 / 60 (incl. T-WEB-1). Integration: 1 / 1 (T-SETUP-3 against lifenest-dev). Lint and type check clean. Android and web bundles build. Database: not run yet (project not linked). | — | Expo SDK 58.0.23, React 19.3.0, React Native 0.88.1, three 0.187.0, @react-three/fiber 9.8.2, expo-gl 58.0.4, react-dom 19.3.0 (peer of R3F), NativeWind 4.2.7 (latest stable; officially lists SDK 57, works here), Tailwind 3.4.19, Jest 30.5 + jest-expo 58, @testing-library/react-native 14.1 (async render API), Supabase CLI 3.0.0, Node 22.14. `app/index.tsx` redirects to S1 until Phase 3. Web fixes: Tailwind `darkMode: 'class'` (NativeWind threw on web because app.json forces light mode); `aria-hidden` instead of legacy accessibility props on SVGs; Expo Router typed routes off until the Phase 3 routes exist. |
 
 ---
 
@@ -1711,6 +1712,8 @@ All tests in this phase are pgTAP tests in `supabase/tests/`.
 | 30 | The S2–S21 designs contain marketing text that is not in the PRD and partly untrue for the MVP ("256-bit vault", "Zero knowledge", "End-to-end encrypted", "Hardware keystore backed"). | Rule 9, Section 3.3 | Decided by the agent, following #17: keep each design's layout and plain headings (e.g. "Create your account", "Welcome back"); use PRD wording for every label and message; drop badges and security claims. The human can change this. | Answered (agent default) |
 | 31 | Web-only gaps: no fingerprint in a browser; no screenshot blocking; `expo-secure-store` does not exist on web; Storage refuses deletes without a select policy. | BR9, SEC18, S9, S20 | Decided by the agent: on web the PIN hash (salted SHA-256) is kept in the browser's localStorage; the fingerprint switch is hidden when the device has no biometrics; screenshot blocking is skipped on web. Owners may read (sign links for) only their own `vault` folder, which Storage needs for deletes; contacts still open files only through `get-file-link`. | Answered (agent default) |
 | 32 | Storage no longer allows deleting files from SQL, so `run_hourly_jobs()` cannot remove proof files 12 months after a request closes (Section 8.5 step 4, POPIA). | Section 8.5, PRD 12 POPIA | Open: add a small scheduled Edge Function that removes those files with the Storage API (not built yet). | Open |
+| 33 | The human changed BR4 (9 Nov 2026): an owner can have at most **3** trusted contacts (invited or accepted), not 5. | BR4, T-US7-2, T-BR4-2, OP20 | Answered: limit is 3 everywhere (database trigger in a new migration, app, message "You can have up to 3 trusted contacts."). Every "5 contacts" in this plan now means 3. | Answered |
+| 34 | The human asked (9 Nov 2026) for the app to look like a web app rather than a phone app. | Section 7, 7.1, 7.2 | Answered by the agent's layout (the human can change it): on screens 900 px or wider, a left sidebar (logo, Home, Documents, Assets, People, Instructions and messages, Emergency profile, More, Lock) replaces the bottom tab bar on every logged-in page; content up to 1,120 px wide with lists in grid columns; forms in a centred 640 px column; S1 becomes a two-column page. Narrow windows and phones keep the mobile layout. New layout tokens added to 7.1. | Answered |
 
 ---
 

@@ -91,7 +91,7 @@ export default function EditDocument() {
   const warning = notesPasswordWarning(notes);
 
   return (
-    <Screen
+    <Screen width="narrow"
       footer={
         <Button title={labels.save} onPress={save} loading={busy} disabled={!valid || offline || preparing} />
       }
